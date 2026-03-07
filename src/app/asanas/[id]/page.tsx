@@ -2,6 +2,9 @@ import { asanas } from '@/data/asanas';
 import { upperBodyMuscles } from '@/data/muscles';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import PageWrapper from '@/components/PageWrapper';
+import PageHeader from '@/components/PageHeader';
+import SectionHeading from '@/components/SectionHeading';
 
 export default async function AsanaDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -13,9 +16,8 @@ export default async function AsanaDetailPage({ params }: { params: Promise<{ id
   const muscles = upperBodyMuscles.filter((m) => asana.target_muscles.includes(m.id));
 
   return (
-    <div className="mx-auto max-w-4xl p-12">
-      <h1 className="text-4xl font-black">{asana.name_ko}</h1>
-      <p className="mb-8 text-lg text-slate-500 italic">{asana.name_sanskrit}</p>
+    <PageWrapper>
+      <PageHeader title={asana.name_ko} subtitle={asana.name_sanskrit} />
 
       {/* 아사나 도해 이미지 */}
       <div className="mb-12">
@@ -25,8 +27,8 @@ export default async function AsanaDetailPage({ params }: { params: Promise<{ id
           className="h-auto w-full rounded-3xl border border-slate-100 shadow-lg"
         />
       </div>
+      <SectionHeading>사용되는 근육들</SectionHeading>
 
-      <h2 className="mb-4 text-xl font-bold">사용되는 근육들</h2>
       <div className="grid grid-cols-2 gap-4">
         {muscles.map((m) => (
           <Link
@@ -37,7 +39,14 @@ export default async function AsanaDetailPage({ params }: { params: Promise<{ id
             {m.name_ko}
           </Link>
         ))}
+
+        <Link
+          href={`/muscles/${id}`}
+          className="block rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-200 hover:border-black hover:shadow-sm"
+        >
+          <span className="font-bold text-slate-900">{123}</span>
+        </Link>
       </div>
-    </div>
+    </PageWrapper>
   );
 }
