@@ -8,6 +8,7 @@ export const asanas: Asana[] = [
     name_sanskrit: 'Bhujangasana',
     description: '가슴을 열어 소흉근을 이완하고 등을 강화합니다.',
     target_muscles: ['m1', 'm3'], // 소흉근(m1), 하부 승모근(m3) 연결
+    imageUrl: '/images/asanas/a1.jpg',
   },
   {
     id: 'a2',

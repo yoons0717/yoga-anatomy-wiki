@@ -78,11 +78,13 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
             <h3 className="mb-6 text-xl font-bold text-slate-900">관련 아사나</h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {relatedAsanas.map((asana) => (
-                <div key={asana.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
-                  <h4 className="font-bold text-slate-900">{asana.name_ko}</h4>
-                  <p className="mb-2 text-sm text-slate-500 italic">{asana.name_sanskrit}</p>
-                  <p className="text-sm leading-relaxed text-slate-600">{asana.description}</p>
-                </div>
+                <Link href={`/asanas/${asana.id}`} key={asana.id}>
+                  <div className="cursor-pointer rounded-2xl border border-slate-100 bg-slate-50 p-6 transition-all hover:border-slate-300">
+                    <h4 className="font-bold text-slate-900">{asana.name_ko}</h4>
+                    <p className="mb-2 text-sm text-slate-500 italic">{asana.name_sanskrit}</p>
+                    <p className="text-sm leading-relaxed text-slate-600">{asana.description}</p>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
