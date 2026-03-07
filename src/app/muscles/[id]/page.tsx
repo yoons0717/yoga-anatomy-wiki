@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { upperBodyMuscles } from '@/data/muscles';
+import { asanas } from '@/data/asanas';
 import { notFound } from 'next/navigation';
 
 export default async function MuscleDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   const muscle = upperBodyMuscles.find((m) => m.id === id);
+  const relatedAsanas = asanas.filter((asana) => asana.target_muscles.includes(id));
 
   if (!muscle) {
     notFound();
@@ -22,9 +24,6 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
         </Link>
 
         <header className="mb-12 border-b pb-8">
-          <span className="text-sm font-bold tracking-widest text-blue-500 uppercase">
-            {muscle.sub_category}
-          </span>
           <h1 className="mt-2 text-4xl font-extrabold text-slate-900">{muscle.name_ko}</h1>
           <p className="text-xl text-slate-400 italic">{muscle.name_en}</p>
         </header>
@@ -72,6 +71,19 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
                   </span>
                 ))}
               </div>
+            </div>
+          </section>
+          {/* 관련 아사나 섹션 */}
+          <section className="mt-16 border-t border-slate-100 pt-8">
+            <h3 className="mb-6 text-xl font-bold text-slate-900">관련 아사나</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {relatedAsanas.map((asana) => (
+                <div key={asana.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                  <h4 className="font-bold text-slate-900">{asana.name_ko}</h4>
+                  <p className="mb-2 text-sm text-slate-500 italic">{asana.name_sanskrit}</p>
+                  <p className="text-sm leading-relaxed text-slate-600">{asana.description}</p>
+                </div>
+              ))}
             </div>
           </section>
         </div>

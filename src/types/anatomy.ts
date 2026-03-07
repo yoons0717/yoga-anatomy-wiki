@@ -5,10 +5,19 @@ export interface Muscle {
   name_ko: string; // 예: 소흉근
   name_en: string; // 예: Pectoralis Minor
   category: BodyPart; // 대분류: 상체
-  sub_category: string; // 소분류: 어깨/가슴
   origin: string; // 기시점 (근육이 시작되는 고정점)
   insertion: string; // 정지점 (근육이 붙어 움직이는 점)
   action: string[]; // 주요 작용 (예: ["견갑골 전인", "견갑골 하방회전"])
   description: string; // 근육의 해부학적 위치 및 특징
   imageUrl?: string; // 해부학 도해 이미지 경로
+}
+
+export interface Asana {
+  id: string;
+  name_ko: string; // 예: 코브라 자세
+  name_en: string; // 예: Cobra Pose
+  name_sanskrit: string; // 예: Bhujangasana
+  description: string; // 간단한 설명
+  target_muscles: string[]; // 연결될 근육의 ID 목록 (예: ["m1", "m2"])
+  imageUrl?: string;
 }
