@@ -12,6 +12,8 @@ export const upperBodyMuscles: Muscle[] = [
     description:
       '대흉근 안쪽에 위치하며, 견갑골을 앞과 아래로 당겨 흉벽에 고정시키는 역할을 합니다.',
     imageUrl: '/images/muscles/m1.jpg',
+
+    area: { top: '35%', left: '2%', width: '10%', height: '5%' },
   },
   {
     id: 'm2',

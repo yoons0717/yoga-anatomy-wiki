@@ -5,6 +5,8 @@ import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/SectionHeading';
 
+import MuscleExplorer from '@/components/MuscleExplorer';
+
 export default async function MuscleDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const muscle = upperBodyMuscles.find((m) => m.id === id);
@@ -16,6 +18,7 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
     <PageWrapper>
       <PageHeader title={muscle.name_ko} subtitle={muscle.name_en} />
 
+      <MuscleExplorer muscles={upperBodyMuscles} />
       <div className="space-y-6 leading-relaxed text-slate-700">
         <p>{muscle.description}</p>
         <div className="rounded-xl bg-slate-50 p-6 font-medium">

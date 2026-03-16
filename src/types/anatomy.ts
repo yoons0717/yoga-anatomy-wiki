@@ -1,4 +1,8 @@
 export type BodyPart = '상체' | '몸통' | '하체' | '호흡';
+export interface Position {
+  top: string;
+  left: string;
+}
 
 export interface Muscle {
   id: string;
@@ -10,6 +14,13 @@ export interface Muscle {
   action: string[]; // 주요 작용 (예: ["견갑골 전인", "견갑골 하방회전"])
   description: string; // 근육의 해부학적 위치 및 특징
   imageUrl?: string; // 해부학 도해 이미지 경로
+  position?: Position; // 마커 위치 정보 (선택 사항)
+  area?: {
+    top: string;
+    left: string;
+    width: string;
+    height: string;
+  };
 }
 
 export interface Asana {
