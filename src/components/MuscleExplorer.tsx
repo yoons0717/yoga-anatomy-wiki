@@ -12,7 +12,7 @@ export default function MuscleExplorer({ muscles }: { muscles: Muscle[] }) {
     <div className="flex flex-col gap-10 rounded-[3rem] border border-stone-100 bg-white p-10 shadow-sm lg:flex-row">
       <div className="relative mx-auto aspect-3/4 w-full max-w-95 shrink-0">
         <Image
-          src="/images/muscles/trunk.png"
+          src="/images/muscles/upper.png"
           alt="Anatomy"
           fill
           className="object-contain opacity-90 grayscale-[0.2]"
