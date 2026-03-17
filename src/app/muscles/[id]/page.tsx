@@ -4,13 +4,12 @@ import Link from 'next/link';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/SectionHeading';
-
 import MuscleExplorer from '@/components/MuscleExplorer';
 
 export default async function MuscleDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const muscle = upperBodyMuscles.find((m) => m.id === id);
-  if (!muscle) return <div>찾을 수 없습니다.</div>;
+  if (!muscle) return <div className="p-20 text-center text-stone-400">찾을 수 없습니다.</div>;
 
   const related = asanas.filter((a) => a.target_muscles.includes(muscle.id));
 
@@ -18,30 +17,44 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
     <PageWrapper>
       <PageHeader title={muscle.name_ko} subtitle={muscle.name_en} />
 
-      <MuscleExplorer muscles={upperBodyMuscles} />
-      <div className="space-y-6 leading-relaxed text-slate-700">
-        <p>{muscle.description}</p>
-        <div className="rounded-xl bg-slate-50 p-6 font-medium">
-          <p>
-            <strong>Origin:</strong> {muscle.origin}
-          </p>
-          <p>
-            <strong>Insertion:</strong> {muscle.insertion}
-          </p>
+      <div className="mb-16">
+        <MuscleExplorer muscles={upperBodyMuscles} />
+      </div>
+
+      <div className="space-y-8 leading-relaxed text-stone-700">
+        <p className="text-lg font-medium text-stone-500 italic">
+          &quot;{muscle.description}&quot;
+        </p>
+
+        <div className="grid grid-cols-1 gap-4 rounded-4xl border border-stone-100/50 bg-stone-50 p-8 md:grid-cols-2">
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
+              Origin
+            </span>
+            <p className="font-bold text-stone-900">{muscle.origin}</p>
+          </div>
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
+              Insertion
+            </span>
+            <p className="font-bold text-stone-900">{muscle.insertion}</p>
+          </div>
         </div>
       </div>
 
-      <section className="mt-16 border-t border-slate-200 pt-12">
+      <section className="mt-20 border-t border-stone-100 pt-12">
         <SectionHeading>관련 아사나</SectionHeading>
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {related.map((a) => (
             <Link
               href={`/asanas/${a.id}`}
               key={a.id}
-              className="rounded-2xl border bg-slate-50 p-6 hover:border-slate-300"
+              className="group rounded-4xl border border-stone-100 bg-white p-8 transition-all hover:bg-stone-900 hover:text-white"
             >
-              <h4 className="font-bold">{a.name_ko}</h4>
-              <p className="text-sm text-slate-500">{a.name_sanskrit}</p>
+              <h4 className="text-lg font-bold">{a.name_ko}</h4>
+              <p className="font-serif text-xs text-stone-400 italic transition-colors group-hover:text-stone-300">
+                {a.name_sanskrit}
+              </p>
             </Link>
           ))}
         </div>

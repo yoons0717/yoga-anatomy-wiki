@@ -3,73 +3,77 @@
 import { Muscle } from '@/types/anatomy';
 import { useState } from 'react';
 import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 
 export default function MuscleExplorer({ muscles }: { muscles: Muscle[] }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
-    <div className="flex gap-8 rounded-2xl border border-slate-200 bg-white p-8 shadow-xl">
-      {/* 1. 이미지 영역 */}
-
-      <div className="relative aspect-3/4 w-125">
+    <div className="flex flex-col gap-10 rounded-[3rem] border border-stone-100 bg-white p-10 shadow-sm lg:flex-row">
+      <div className="relative mx-auto aspect-3/4 w-full max-w-95 shrink-0">
         <Image
           src="/images/muscles/trunk.png"
           alt="Anatomy"
-          fill // 부모 크기를 꽉 채움
-          className="object-contain" // 이미지 비율 유지
-          priority // 해부학 지도는 중요하므로 우선 로딩
+          fill
+          className="object-contain opacity-90 grayscale-[0.2]"
+          priority
         />
 
         {muscles.map((m) => (
           <div
             key={m.id}
             onClick={() => setSelectedId(m.id)}
-            className={`absolute z-10 cursor-pointer transition-all duration-300 ease-in-out ${
+            className={`absolute z-10 cursor-pointer rounded-full transition-all duration-300 ease-in-out ${
               selectedId === m.id
-                ? 'bg-indigo-500/40 ring-2 ring-indigo-400'
-                : 'hover:bg-indigo-400/20'
+                ? 'bg-stone-900/10 shadow-lg ring-1 ring-stone-400'
+                : 'hover:bg-stone-200/20'
             }`}
             style={m.area}
           />
         ))}
       </div>
 
-      {/* 2. 부드러운 아코디언 리스트 영역 */}
-      <div className="w-80 space-y-3">
-        <h2 className="mb-6 text-2xl font-bold text-slate-800">근육 탐색기</h2>
-        {muscles.map((m) => (
-          <div
-            key={m.id}
-            className="overflow-hidden rounded-xl border border-slate-200 transition-all duration-300"
-          >
-            <button
-              onClick={() => setSelectedId(selectedId === m.id ? null : m.id)}
-              className={`flex w-full items-center justify-between p-5 text-left font-bold transition-colors duration-300 ${
-                selectedId === m.id
-                  ? 'bg-slate-900 text-white'
-                  : 'bg-white text-slate-700 hover:bg-slate-50'
+      <div className="w-full flex-1 space-y-2">
+        <h2 className="mb-6 text-[10px] font-black tracking-[0.3em] text-stone-400 uppercase">
+          Muscle Explorer
+        </h2>
+        <div className="custom-scrollbar max-h-112.5 overflow-y-auto pr-2">
+          {muscles.map((m) => (
+            <div
+              key={m.id}
+              className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                selectedId === m.id ? 'border-stone-200 bg-stone-50/50' : 'border-transparent'
               }`}
             >
-              {m.name_en} ({m.name_ko})
-              <span
-                className={`transform transition-transform duration-300 ${selectedId === m.id ? 'rotate-180' : ''}`}
+              <button
+                onClick={() => setSelectedId(selectedId === m.id ? null : m.id)}
+                className={`flex w-full items-center justify-between p-5 text-left transition-all ${
+                  selectedId === m.id ? 'text-stone-900' : 'text-stone-500 hover:text-stone-800'
+                }`}
               >
-                ▼
-              </span>
-            </button>
+                <span className="text-sm font-bold tracking-tight">
+                  {m.name_en}{' '}
+                  <span className="ml-1 text-[11px] font-medium opacity-50">({m.name_ko})</span>
+                </span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${selectedId === m.id ? 'rotate-180' : ''}`}
+                />
+              </button>
 
-            {/* 높이 변화를 이용한 부드러운 아코디언 */}
-            <div
-              className={`grid transition-all duration-300 ease-in-out ${selectedId === m.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
-            >
-              <div className="overflow-hidden">
-                <p className="bg-slate-50 p-5 text-sm leading-relaxed text-slate-600">
-                  {m.description}
-                </p>
+              <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                  selectedId === m.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="px-5 pb-5 text-[13px] leading-relaxed text-stone-500">
+                    {m.description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
