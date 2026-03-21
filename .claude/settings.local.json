@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(curl:*)",
+      "Bash(kill -9 68949)",
+      "Bash(node -e \"const next = require\\(''''next''''\\); const app = next\\({dev: true}\\); app.prepare\\(\\).then\\(\\(\\) => console.log\\(''''Ready''''\\)\\).catch\\(e => console.error\\(e\\)\\)\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(rm -f /Users/yoonmigoo/Desktop/myProject/yoga-anatomy-wiki/.next/dev/lock)",
+      "Bash(lsof -ti:3000)"
+    ]
+  }
+}

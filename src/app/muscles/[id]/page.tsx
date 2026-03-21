@@ -17,100 +17,56 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
     <PageWrapper>
       <PageHeader title={muscle.name_ko} subtitle={muscle.name_en} />
 
-      {/* 탐색기 영역: 여백 최적화 */}
-      <div className="mb-20 rounded-[3rem] border border-stone-100 bg-stone-50/30 shadow-sm">
-        <MuscleExplorer muscles={upperBodyMuscles} />
+      {/* 모바일에서 여백 축소 (p-4 -> md:p-10) */}
+      <div className="mb-12 overflow-hidden sm:mb-20">
+        <MuscleExplorer muscles={upperBodyMuscles} muscleId={id} />
       </div>
 
-      {/* 근육 정보 섹션 */}
-      <div className="space-y-16">
-        {/* Description: 텍스트 농도 조절 (stone-600) */}
-        <div className="max-w-3xl space-y-4 px-2">
+      <div className="space-y-12 sm:space-y-16">
+        {/* Description: 텍스트 크기 조절 (text-lg sm:text-xl) */}
+        <div className="max-w-3xl space-y-4 px-1">
           <h3 className="text-[10px] font-black tracking-[0.2em] text-stone-400 uppercase">
             Functional Overview
           </h3>
-          <p className="text-xl leading-relaxed font-medium break-keep text-stone-600 italic">
+          <p className="text-lg leading-relaxed font-medium break-keep text-stone-600 italic sm:text-xl">
             &quot;{muscle.description}&quot;
           </p>
         </div>
 
-        {/* 상세 정보 카드: divide 및 패딩 수정 */}
-        <div className="overflow-hidden rounded-[2.5rem] border border-stone-100 bg-white">
-          <div className="grid grid-cols-1 divide-y divide-stone-100">
-            {/* 1. Origin & 2. Insertion: 텍스트 컬러 stone-800 및 간격 최적화 */}
-            <div className="grid grid-cols-1 divide-y divide-stone-100 md:grid-cols-2 md:divide-x md:divide-y-0">
-              <div className="space-y-3 p-10 md:p-12">
-                <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
-                  Origin
-                </span>
-                <p className="max-w-[40ch] text-[15px] leading-relaxed font-bold break-keep text-stone-800">
-                  {muscle.origin}
-                </p>
-              </div>
-
-              <div className="space-y-3 p-10 md:p-12">
-                <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
-                  Insertion
-                </span>
-                <p className="max-w-[40ch] text-[15px] leading-relaxed font-bold break-keep text-stone-800">
-                  {muscle.insertion}
-                </p>
-              </div>
+        {/* Origin & Insertion: 모바일에서 상하 배치, 데스크탑에서 좌우 배치 */}
+        <div className="overflow-hidden rounded-[2rem] border border-stone-100 bg-white shadow-sm sm:rounded-[2.5rem]">
+          <div className="grid grid-cols-1 divide-y divide-stone-100 md:grid-cols-2 md:divide-x md:divide-y-0">
+            <div className="space-y-3 p-8 sm:p-10">
+              <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
+                Origin
+              </span>
+              <p className="max-w-[40ch] text-[14px] leading-relaxed font-bold break-keep text-stone-800 sm:text-[15px]">
+                {muscle.origin}
+              </p>
             </div>
 
-            {/* 3. Action: 배경색(stone-50/50)과 그리드 간격 수정 */}
-            <div className="space-y-10 bg-stone-50/50 p-10 md:p-12">
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] font-bold tracking-[0.2em] text-stone-400 uppercase">
-                  Actions & Function
-                </span>
-                <div className="h-px flex-1 bg-stone-100" />
-              </div>
-
-              <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-                {muscle.action.map((act, index) => {
-                  const hasDivider = act.includes(' - ');
-                  const [title, content] = hasDivider ? act.split(' - ') : [null, act];
-
-                  return (
-                    <div key={index} className="group">
-                      {hasDivider ? (
-                        <div className="space-y-3">
-                          <div className="inline-block border-b border-stone-900 pb-0.5">
-                            <span className="text-[11px] font-black tracking-tighter text-stone-900 uppercase">
-                              {title}
-                            </span>
-                          </div>
-                          <p className="text-[14px] leading-snug font-bold break-keep text-stone-700">
-                            {content}
-                          </p>
-                        </div>
-                      ) : (
-                        <div className="flex items-start gap-3">
-                          <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-stone-300 transition-colors group-hover:bg-stone-900" />
-                          <p className="text-[14px] leading-snug font-bold break-keep text-stone-700 transition-colors group-hover:text-stone-900">
-                            {content}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+            <div className="space-y-3 p-8 sm:p-10">
+              <span className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
+                Insertion
+              </span>
+              <p className="max-w-[40ch] text-[14px] leading-relaxed font-bold break-keep text-stone-800 sm:text-[15px]">
+                {muscle.insertion}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 하단 아사나: SectionHeading 디자인에 맞춘 간격 */}
-      <section className="mt-24 border-t border-stone-100 px-2 pt-16 pb-20">
+      {/* 관련 아사나: SectionHeading 간격 조정 */}
+      <section className="mt-20 border-t border-stone-100 px-1 pt-12 pb-20 sm:mt-24 sm:pt-16">
         <SectionHeading>관련 아사나</SectionHeading>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {/* 목록 카드 사이즈를 목록 페이지와 동일하게 통일 (gap-4 sm:gap-6) */}
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {related.map((a) => (
             <Link
               href={`/asanas/${a.id}`}
               key={a.id}
-              className="group rounded-[2rem] border border-stone-100 bg-white p-8 transition-all hover:-translate-y-1 hover:bg-stone-900 hover:shadow-xl hover:shadow-stone-200/50"
+              className="group rounded-[2rem] border border-stone-100 bg-white p-7 transition-all active:scale-95 sm:p-8 sm:hover:-translate-y-1 sm:hover:bg-stone-900 sm:hover:shadow-xl sm:hover:shadow-stone-200/50"
             >
               <h4 className="text-lg font-bold text-stone-800 transition-colors group-hover:text-white">
                 {a.name_ko}

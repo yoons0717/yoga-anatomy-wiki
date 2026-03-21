@@ -23,45 +23,48 @@ export default function AsanaListPage() {
         title="Asana Index"
         subtitle="The sacred geometry of the human body in stillness and flow."
       />
-
-      <div className="relative mb-16 max-w-md">
+      <div className="relative mb-10 max-w-md sm:mb-16">
         <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-stone-300" />
         <input
-          className="w-full border-b border-stone-200 bg-transparent pb-4 pl-10 text-base text-stone-900 transition-all outline-none placeholder:text-stone-300 focus:border-stone-500"
+          className="w-full border-b border-stone-200 bg-transparent pb-3 pl-10 text-[15px] text-stone-900 transition-all outline-none placeholder:text-stone-300 focus:border-stone-500 sm:pb-4 sm:text-base"
           placeholder="Search asanas..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((a) => (
           <Link
             href={`/asanas/${a.id}`}
             key={a.id}
-            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-9 transition-all hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-stone-200/40"
+            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] sm:rounded-4xl sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
           >
-            <div className="space-y-6">
+            <div className="space-y-5 sm:space-y-6">
               <div className="flex items-start justify-between">
+                {/* 아사나 전용 아이콘 */}
                 <Wind className="h-4 w-4 text-stone-200 transition-all duration-500 group-hover:rotate-180 group-hover:text-stone-800" />
-                <div className="h-1 w-1 rounded-full bg-stone-200 group-hover:bg-stone-400" />
+                <div className="h-1 w-1 rounded-full bg-stone-200 sm:group-hover:bg-stone-400" />
               </div>
+
               <div className="space-y-2">
-                <h3 className="text-xl font-bold tracking-tight text-stone-800 group-hover:text-black">
+                <h3 className="text-lg font-bold tracking-tight text-stone-800 sm:text-xl sm:group-hover:text-black">
                   {a.name_ko}
                 </h3>
                 <div className="space-y-1">
-                  <p className="font-serif text-[11px] text-stone-500 italic group-hover:text-stone-700">
+                  {/* 카테고리 대신 산스크리트어 명칭 배치 (에러 해결) */}
+                  <p className="font-serif text-[10px] text-stone-500 italic sm:text-[11px] sm:group-hover:text-stone-700">
                     {a.name_sanskrit}
                   </p>
-                  <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">
+                  <p className="text-[9px] font-bold tracking-widest text-stone-400 uppercase sm:text-[10px]">
                     {a.name_en}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="mt-10 flex translate-y-2 items-center gap-2 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
-              <span className="text-[10px] font-black tracking-tighter text-stone-800 uppercase">
+
+            <div className="mt-8 flex items-center gap-2 opacity-60 transition-all sm:mt-10 sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
+              <span className="text-[9px] font-black tracking-tighter text-stone-800 uppercase">
                 Practice Guide
               </span>
               <div className="h-px w-4 bg-stone-800" />

@@ -22,22 +22,22 @@ export default function MuscleListPage() {
         subtitle="Exploring anatomical structures through mindful observation."
       />
 
-      <div className="relative mb-16 max-w-md">
+      <div className="relative mb-10 max-w-md sm:mb-16">
         <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-stone-300" />
         <input
-          className="w-full border-b border-stone-200 bg-transparent pb-4 pl-10 text-base text-stone-900 transition-all outline-none placeholder:text-stone-300 focus:border-stone-500"
+          className="w-full border-b border-stone-200 bg-transparent pb-3 pl-10 text-[15px] text-stone-900 transition-all outline-none placeholder:text-stone-300 focus:border-stone-500 sm:pb-4 sm:text-base"
           placeholder="Search muscles..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((m) => (
           <Link
             href={`/muscles/${m.id}`}
             key={m.id}
-            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-9 transition-all hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-stone-200/40"
+            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] sm:rounded-4xl sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
           >
             <div className="space-y-6">
               <div className="flex items-start justify-between">
@@ -53,7 +53,7 @@ export default function MuscleListPage() {
                 </p>
               </div>
             </div>
-            <div className="mt-10 flex translate-y-2 items-center gap-2 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+            <div className="mt-8 flex items-center gap-2 opacity-40 transition-all sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
               <span className="text-[10px] font-black tracking-tighter text-stone-800 uppercase">
                 View Details
               </span>

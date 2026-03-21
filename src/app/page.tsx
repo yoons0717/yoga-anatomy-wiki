@@ -7,65 +7,58 @@ export const metadata: Metadata = {
   title: 'Anatomy Archive',
   description: 'The intersection of yoga and anatomy.',
 };
-
 export default function HomePage() {
   return (
-    <div className="relative flex min-h-[60vh] flex-col justify-center">
-      {/* 연하게 배경에 깔리는 슬로건) */}
-      <div className="absolute top-0 left-0 -translate-x-12 -translate-y-12 opacity-[0.02] select-none">
-        <h1 className="text-[12rem] leading-none font-black">YOGA</h1>
+    <div className="relative flex min-h-[50vh] flex-col justify-center overflow-hidden">
+      <div className="pointer-events-none absolute top-0 left-0 -translate-x-6 -translate-y-6 opacity-[0.03] select-none">
+        <h1 className="text-[6rem] leading-none font-black sm:text-[12rem]">YOGA</h1>
       </div>
 
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-        <div className="z-10 space-y-12 lg:col-span-7">
-          <div className="space-y-4">
-            <p className="text-[11px] font-bold tracking-[0.4em] text-slate-400 uppercase">
+        <div className="z-10 order-2 space-y-8 sm:space-y-12 lg:order-1 lg:col-span-7">
+          <div className="space-y-3 sm:space-y-4">
+            <p className="text-[9px] font-bold tracking-[0.4em] text-slate-400 uppercase sm:text-[11px]">
               Yoga Anatomy Archive
             </p>
-            <h2 className="text-7xl leading-[1.05] font-black tracking-tighter text-slate-950">
+
+            <h2 className="text-4xl leading-[1.1] font-black tracking-tighter text-slate-950 sm:text-7xl">
               Precision <br />
               in <span className="font-serif font-light text-slate-300 italic">Motion.</span>
             </h2>
           </div>
 
           <div className="max-w-md space-y-6">
-            <p className="text-base leading-relaxed font-medium text-slate-600">
-              &quot;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-              Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled it to make a type specimen book.
-              It has survived not only five centuries, but also the leap into electronic
-              typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-              release of Letraset sheets containing Lor&quot;
+            <p className="text-[14px] leading-relaxed font-medium break-keep text-slate-600 sm:text-base">
+              아사나의 정렬과 신체 구조의 이해를 돕기 위한 직관적인 아카이브입니다. 요가의 움직임
+              뒤에 숨겨진 해부학적 원리를 탐구하세요.
             </p>
             <div className="h-px w-12 bg-slate-200" />
-            <p className="text-xs font-bold tracking-widest text-slate-400 uppercase">
+            <p className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
               — Founded by ym
             </p>
           </div>
 
-          <div className="flex items-center gap-10 pt-4">
+          <div className="flex flex-row items-center gap-6 pt-4 sm:gap-10">
             <Link
               href="/asanas"
-              className="group flex items-center gap-3 text-sm font-black tracking-widest text-slate-900 uppercase transition hover:opacity-60"
+              className="group flex items-center gap-2 text-[12px] font-black tracking-widest text-slate-900 uppercase transition hover:opacity-60"
             >
-              Explore Asanas
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+              Explore
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/muscles"
-              className="group text-sm font-black tracking-widest text-slate-400 uppercase transition hover:text-slate-900"
+              className="text-[12px] font-black tracking-widest text-slate-400 uppercase transition hover:text-slate-900"
             >
               Muscle Map
             </Link>
           </div>
         </div>
 
-        {/* 오른쪽: 스켈레톤 이미지 (5칸 차지) */}
-        <div className="relative flex justify-center lg:col-span-5 lg:justify-end">
-          <div className="relative aspect-3/4 w-full max-w-[320px]">
-            {/* 이미지 배경에 은은한 원형 광택 효과 */}
-            <div className="bg-radial-gradient absolute inset-0 scale-125 rounded-full from-slate-100 to-transparent opacity-50 blur-3xl" />
-
+        {/* 이미지: 모바일에서는 텍스트 위로 오도록 순서 변경(order-1) */}
+        <div className="relative order-1 flex justify-center lg:order-2 lg:col-span-5 lg:justify-end">
+          <div className="relative aspect-3/4 w-full max-w-[240px] sm:max-w-[320px]">
+            <div className="bg-radial-gradient absolute inset-0 scale-125 rounded-full from-slate-100 to-transparent opacity-40 blur-3xl" />
             <Image
               src="/images/skeleton.png"
               alt="Anatomical Vision"
@@ -77,21 +70,21 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 하단 푸터 느낌의 명언: 아주 작고 정갈하게 배치 */}
-      <div className="mt-32 flex flex-col items-end justify-between gap-6 border-t border-slate-50 pt-12 md:flex-row">
-        <div className="max-w-xs">
-          <p className="text-[10px] leading-relaxed font-bold tracking-widest text-slate-400 uppercase">
+      {/* 하단 섹션: 모바일에서 중앙 정렬 및 여백 축소 */}
+      <div className="mt-20 flex flex-col items-start justify-between gap-8 border-t border-slate-50 pt-10 sm:mt-32 sm:items-end md:flex-row">
+        <div className="max-w-xs space-y-2">
+          <p className="text-[9px] leading-relaxed font-bold tracking-widest break-keep text-slate-400 uppercase sm:text-[10px]">
             &quot;The body is your temple. Keep it pure and clean for the soul to reside in.&quot;
           </p>
-          <p className="mt-2 text-[10px] text-slate-300">— B.K.S. IYENGAR</p>
+          <p className="text-[9px] text-slate-300">— B.K.S. IYENGAR</p>
         </div>
 
-        <div className="flex gap-4 text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase">
-          <span>Safety</span>
-          <span className="text-slate-200">/</span>
-          <span>Alignment</span>
-          <span className="text-slate-200">/</span>
-          <span>Science</span>
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[9px] font-black tracking-[0.2em] text-slate-300 uppercase">
+          <span className="text-slate-400">Safety</span>
+          <span>/</span>
+          <span className="text-slate-400">Alignment</span>
+          <span>/</span>
+          <span className="text-slate-400">Science</span>
         </div>
       </div>
     </div>

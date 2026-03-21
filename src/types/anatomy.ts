@@ -13,7 +13,6 @@ export interface Muscle {
   insertion: string; // 정지점 (근육이 붙어 움직이는 점)
   action: string[]; // 주요 작용 (예: ["견갑골 전인", "견갑골 하방회전"])
   description: string; // 근육의 해부학적 위치 및 특징
-
   area?: {
     top: string;
     left: string;
