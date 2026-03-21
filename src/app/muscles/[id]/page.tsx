@@ -1,5 +1,6 @@
 import { upperBodyMuscles } from '@/data/muscles';
 import { asanas } from '@/data/asanas';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
@@ -9,7 +10,7 @@ import MuscleExplorer from '@/components/MuscleExplorer';
 export default async function MuscleDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const muscle = upperBodyMuscles.find((m) => m.id === id);
-  if (!muscle) return <div className="p-20 text-center text-stone-400">찾을 수 없습니다.</div>;
+  if (!muscle) notFound();
 
   const related = asanas.filter((a) => a.target_muscles.includes(muscle.id));
 
@@ -17,13 +18,11 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
     <PageWrapper>
       <PageHeader title={muscle.name_ko} subtitle={muscle.name_en} />
 
-      {/* 모바일에서 여백 축소 (p-4 -> md:p-10) */}
       <div className="mb-12 overflow-hidden sm:mb-20">
         <MuscleExplorer muscles={upperBodyMuscles} muscleId={id} />
       </div>
 
       <div className="space-y-12 sm:space-y-16">
-        {/* Description: 텍스트 크기 조절 (text-lg sm:text-xl) */}
         <div className="max-w-3xl space-y-4 px-1">
           <h3 className="text-[10px] font-black tracking-[0.2em] text-stone-400 uppercase">
             Functional Overview
@@ -33,7 +32,6 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
           </p>
         </div>
 
-        {/* Origin & Insertion: 모바일에서 상하 배치, 데스크탑에서 좌우 배치 */}
         <div className="overflow-hidden rounded-[2rem] border border-stone-100 bg-white shadow-sm sm:rounded-[2.5rem]">
           <div className="grid grid-cols-1 divide-y divide-stone-100 md:grid-cols-2 md:divide-x md:divide-y-0">
             <div className="space-y-3 p-8 sm:p-10">
@@ -57,10 +55,8 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
         </div>
       </div>
 
-      {/* 관련 아사나: SectionHeading 간격 조정 */}
       <section className="mt-20 border-t border-stone-100 px-1 pt-12 pb-20 sm:mt-24 sm:pt-16">
         <SectionHeading>관련 아사나</SectionHeading>
-        {/* 목록 카드 사이즈를 목록 페이지와 동일하게 통일 (gap-4 sm:gap-6) */}
         <div className="mt-8 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {related.map((a) => (
             <Link

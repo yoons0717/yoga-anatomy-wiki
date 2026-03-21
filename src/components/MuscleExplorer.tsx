@@ -40,7 +40,6 @@ export default function MuscleExplorer({
         ))}
       </div>
 
-      {/* 리스트 영역: 모바일에서 가독성을 위해 간격 및 폰트 사이즈 조정 */}
       <div className="w-full flex-1 space-y-2">
         <h2 className="mb-4 text-[10px] font-black tracking-[0.3em] text-stone-400 uppercase sm:mb-6">
           Muscle Explorer

@@ -55,7 +55,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 이미지: 모바일에서는 텍스트 위로 오도록 순서 변경(order-1) */}
         <div className="relative order-1 flex justify-center lg:order-2 lg:col-span-5 lg:justify-end">
           <div className="relative aspect-3/4 w-full max-w-[240px] sm:max-w-[320px]">
             <div className="bg-radial-gradient absolute inset-0 scale-125 rounded-full from-slate-100 to-transparent opacity-40 blur-3xl" />
@@ -70,7 +69,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 하단 섹션: 모바일에서 중앙 정렬 및 여백 축소 */}
       <div className="mt-20 flex flex-col items-start justify-between gap-8 border-t border-slate-50 pt-10 sm:mt-32 sm:items-end md:flex-row">
         <div className="max-w-xs space-y-2">
           <p className="text-[9px] leading-relaxed font-bold tracking-widest break-keep text-slate-400 uppercase sm:text-[10px]">

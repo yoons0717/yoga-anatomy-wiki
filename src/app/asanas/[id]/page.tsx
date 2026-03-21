@@ -19,16 +19,17 @@ export default async function AsanaDetailPage({ params }: { params: Promise<{ id
     <PageWrapper>
       <PageHeader title={asana.name_ko} subtitle={asana.name_sanskrit} />
 
-      {/* 아사나 도해 이미지 */}
-      <div className="mb-12 sm:mb-20">
-        <Image
-          src={asana.imageUrl || '/images/asanas/default.jpg'}
-          alt={asana.name_ko}
-          className="h-auto w-full rounded-3xl border border-stone-100 shadow-lg"
-          width={600}
-          height={400}
-        />
-      </div>
+      {asana.imageUrl && (
+        <div className="mb-12 sm:mb-20">
+          <Image
+            src={asana.imageUrl}
+            alt={asana.name_ko}
+            className="h-auto w-full rounded-3xl border border-stone-100 shadow-lg"
+            width={600}
+            height={400}
+          />
+        </div>
+      )}
 
       <section className="border-t border-stone-100 pt-12 pb-20 sm:pt-16">
         <SectionHeading>사용되는 근육들</SectionHeading>
