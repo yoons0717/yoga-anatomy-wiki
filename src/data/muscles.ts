@@ -11,7 +11,7 @@ export const upperBodyMuscles: Muscle[] = [
     action: ['견관절 외전(Abduction) 초기 30도', '상완골 안정화'],
     description:
       '회전근개를 구성하는 네 개의 근육 중 하나로, 팔을 옆으로 벌리는 작용(외전)을 하고, 어깨 관절의 안정성을 유지하는 데 기여합니다.',
-    area: { top: '15%', left: '84.5%', width: '13%', height: '3%' },
+    area: { top: '33.5%', left: '84.5%', width: '13%', height: '3%' },
   },
   {
     id: 'um2',
@@ -23,7 +23,7 @@ export const upperBodyMuscles: Muscle[] = [
     action: ['견관절 외회전(External Rotation)', '견관절 신전(Extension)'],
     description:
       '회전근개를 구성하는 네 개의 근육 중 하나로, 어깨 관절의 외회전을 만들어주고, 어깨를 안정시켜주는 근육.',
-    area: { top: '21%', left: '84%', width: '12.5%', height: '3%' },
+    area: { top: '38%', left: '84.5%', width: '12%', height: '3%' },
   },
   {
     id: 'um3',
@@ -35,7 +35,7 @@ export const upperBodyMuscles: Muscle[] = [
     action: ['견관절 외회전(External Rotation)', '견관절 신전', '견관절 안정화'],
     description:
       '회전근개를 구성하는 네 개의 근육 중 하나로, 극하근과 함께 어깨 관절의 외회전을 도와주는 협력근',
-    area: { top: '25%', left: '84.5%', width: '11%', height: '3%' },
+    area: { top: '42.5%', left: '84.5%', width: '11%', height: '3%' },
   },
   {
     id: 'um4',
@@ -46,7 +46,7 @@ export const upperBodyMuscles: Muscle[] = [
     insertion: '상완골의 소결절(humerus Lesser tubercle)',
     action: ['견관절 내회전(Internal Rotation)', '상완골두의 안정성 제공'],
     description: '회전근개 중에서 유일하게 내회전을 담당하는 근육입니다.',
-    area: { top: '33.5%', left: '84.5%', width: '12%', height: '3%' },
+    area: { top: '50%', left: '84.5%', width: '12%', height: '3%' },
   },
   {
     id: 'um5',
@@ -63,7 +63,7 @@ export const upperBodyMuscles: Muscle[] = [
     ],
     description:
       '등 전체에 넓게 퍼져 있는 근육으로, 상부, 중부, 하부로 나뉘며, 견갑골의 다양한 움직임에 관여합니다. 어깨를 들어올리고, 내리고, 뒤로 당기며, 회전시키는 역할을 합니다.',
-    area: { top: '6%', left: '26%', width: '10%', height: '3%' },
+    area: { top: '25%', left: '26%', width: '10%', height: '3%' },
   },
   {
     id: 'um6',
@@ -79,7 +79,7 @@ export const upperBodyMuscles: Muscle[] = [
     ],
     description:
       '등의 넓은 근육으로, 팔을 몸쪽으로 당기고 내회전시키며, 팔을 뒤로 젖히는 동작에 관여합니다.',
-    area: { top: '50.5%', left: '69%', width: '15%', height: '3%' },
+    area: { top: '65%', left: '69%', width: '15%', height: '3%' },
   },
   {
     id: 'um7',
@@ -95,7 +95,7 @@ export const upperBodyMuscles: Muscle[] = [
       '광배근의 보조근',
     ],
     description: '광배근의 보조근으로 작용하며, 팔을 안으로 돌려 어깨의 내회전을 만듭니다.',
-    area: { top: '28.5%', left: '84.5%', width: '11%', height: '3%' },
+    area: { top: '45.5%', left: '84.5%', width: '11%', height: '3%' },
   },
   {
     id: 'um8',
@@ -110,6 +110,112 @@ export const upperBodyMuscles: Muscle[] = [
     ],
     description:
       '목과 어깨를 연결하는 근육으로, 승모근보다 안쪽에 위치한 속근육으로 견갑골을 들어올리는 역할을 합니다.',
-    area: { top: '4%', left: '67%', width: '15%', height: '3%' },
+    area: { top: '23.5%', left: '67%', width: '15%', height: '3%' },
+  },
+  {
+    id: 'um9',
+    name_ko: '능형근',
+    name_en: 'Rhomboids',
+    category: '상체',
+    origin: '소능형근 - C7~T1의 극돌기, 대능형근 - T2~T5의 극돌기',
+    insertion: '소능형근 - 견갑근, 대능형근 - 견갑골 내측면(Medial border of scapula)',
+    action: [
+      '견갑골 후인(Retraction)',
+      '견갑골 하방회전(Downward Rotation), 견갑골 거상(Elevation), 견갑골의 안정성 유지',
+    ],
+    description:
+      '승모근과 함께 견갑골을 뒤로 당기는 역할을 하는 근육으로, 승모근보다 안쪽에 위치한 속근육입니다.',
+    area: { top: '29%', left: '77.5%', width: '11%', height: '3%' },
+  },
+  {
+    id: 'um10',
+    name_ko: '삼각근',
+    name_en: 'Deltoid',
+    category: '상체',
+    origin: '전면 - 쇄골의 외측 1/3, 측면 - 견봉돌기 측면, 후면 - 견갑극돌기',
+    insertion: '상완골 측면의 삼각근 조면',
+    action: [
+      '전면 - 견관절 굴곡(Flexion)',
+      '측면 - 견관절 외전(Abduction)',
+      '후면 - 견관절 신전(Extension)',
+    ],
+    description:
+      '어깨 관절의 외전을 담당하는 주요 근육으로, 어깨관절을 둥글게 감싸고 있으며, 전면, 측면, 후면으로 나뉘어 다양한 어깨 움직임에 관여합니다.',
+    area: { top: '36.5%', left: '10%', width: '8%', height: '3%' },
+  },
+  {
+    id: 'um11',
+    name_ko: '대흉근',
+    name_en: 'Pectoralis Major',
+    category: '상체',
+    origin: '상부 - 쇄골의 내측 1/2, 중부 - 흉골과 제 2~7 늑연골, 하부 - 복직근초',
+    insertion: '상완골의 이두근구 (Lateral lip of the bicipital groove)',
+    action: [
+      '견관절 굴곡(Flexion)',
+      '견관절 수평내전(Horizontal Adduction)',
+      '견관절 내회전(Internal Rotation)',
+    ],
+    description:
+      '가슴을 덮고 있는 부채꼴 모양의 근육으로, 근육의 기시점이 넓게 퍼져 있어 다양한 어깨 움직임에 관여합니다.',
+    area: { top: '43%', left: '3.5%', width: '14%', height: '3%' },
+  },
+  {
+    id: 'um12',
+    name_ko: '소흉근',
+    name_en: 'Pectoralis Minor',
+    category: '상체',
+    origin: '3~5번 늑골',
+    insertion: '견갑골의 오훼돌기',
+    action: ['견갑골 전인, 견갑골 하강(Depression)', '견갑골 하방회전'],
+    description: '갈비뼈에 붙어서 호흡을 크게 들이마실 때 보조하는 호흡 보조 근육입니다.',
+    area: { top: '46.5%', left: '3.5%', width: '14%', height: '3%' },
+  },
+  {
+    id: 'um13',
+    name_ko: '전거근',
+    name_en: 'Serratus Anterior',
+    category: '상체',
+    origin: '1~9번 늑골의 외측',
+    insertion: '견갑골의 내측면(Medial border of scapula)',
+    action: ['견갑골 전인(Protraction)', '견갑골 상방회전(Upward Rotation)', '견갑대의 안정화근'],
+    description:
+      '가슴과 어깨 사이에 위치한 근육으로, 견갑골을 앞으로 당기는 역할을 하며, 어깨를 들어올리는 동작에 관여합니다.',
+    area: { top: '63.5%', left: '26%', width: '9%', height: '5%' },
+  },
+  {
+    id: 'um14',
+    name_ko: '상완이두근',
+    name_en: 'Biceps Brachii',
+    category: '상체',
+    origin: '장두 - 견갑골의 관절상결절, 단두 - 견갑골의 오훼돌기',
+    insertion: '요골조면',
+    action: ['주관절 굴곡', '견관절 굴곡', '전완 회외(Supination)'],
+    description:
+      '팔의 앞쪽에 위치한 근육으로, 팔을 굽히는 동작과 전완을 회외하는 동작에 관여합니다.',
+    area: { top: '50.5%', left: '5%', width: '13%', height: '3%' },
+  },
+  {
+    id: 'um15',
+    name_ko: '상완근',
+    name_en: 'Brachialis',
+    category: '상체',
+    origin: '상완골의 전면 하부 절반',
+    insertion: '척골조면',
+    action: ['주관절 굴곡'],
+    description:
+      '상완이두근 아래에 위치한 근육으로, 팔을 굽히는 동작에 관여하며, 상완이두근과 함께 작용하여 팔을 굽히는 역할을 합니다.',
+    area: { top: '56%', left: '8%', width: '10%', height: '3%' },
+  },
+  {
+    id: 'um16',
+    name_ko: '상완삼두근',
+    name_en: 'Triceps Brachii',
+    category: '상체',
+    origin:
+      '장두 - 견갑골의 관절하결절, 외측두 - 상완골 후면 상부 절반, 내측두 - 상완골의 후면 하부 절반',
+    insertion: '척골 주두돌기',
+    action: ['주관절 신전', '견관절 신전'],
+    description: '팔의 뒤쪽에 위치한 근육으로, 장두는 상완골두를 안정화합니다.',
+    area: { top: '54%', left: '84.5%', width: '13%', height: '3%' },
   },
 ];

@@ -17,27 +17,28 @@ export default function MuscleExplorer({
   return (
     <div className="flex flex-col gap-8 rounded-[2.5rem] border border-stone-100 bg-white p-6 shadow-sm sm:gap-10 sm:rounded-[3.3rem] sm:p-10 lg:flex-row">
       <div className="relative mx-auto w-full max-w-105 shrink-0 lg:mx-0 lg:max-w-115">
-        <Image
-          src="/images/muscles/upper.png"
-          alt="Anatomy"
-          width={460}
-          height={550}
-          className="h-auto w-full object-contain opacity-90"
-          priority
-        />
-
-        {muscles.map((m) => (
-          <div
-            key={m.id}
-            onClick={() => setSelectedId(m.id)}
-            className={`absolute z-10 cursor-pointer rounded-full transition-all duration-300 ${
-              selectedId === m.id
-                ? 'scale-110 bg-sky-500/20 shadow-lg ring-2 ring-sky-400/30'
-                : 'bg-stone-900/10 hover:bg-sky-500/10'
-            }`}
-            style={m.area}
+        <div className="relative aspect-[460/550] w-full">
+          <Image
+            src="/images/muscles/upper.png"
+            alt="Anatomy"
+            fill
+            className="object-contain opacity-90"
+            priority
           />
-        ))}
+
+          {muscles.map((m) => (
+            <div
+              key={m.id}
+              onClick={() => setSelectedId(m.id)}
+              className={`absolute z-10 cursor-pointer rounded-full transition-all duration-300 ${
+                selectedId === m.id
+                  ? 'bg-sky-500/20 shadow-lg ring-2 ring-sky-400/30'
+                  : 'bg-stone-900/10 hover:bg-sky-500/10'
+              }`}
+              style={m.area}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="w-full flex-1 space-y-2">
