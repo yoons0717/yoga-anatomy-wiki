@@ -1,4 +1,4 @@
-import { upperBodyMuscles } from '@/data/muscles';
+import { allMuscles, CATEGORY_IMAGES } from '@/data/muscles';
 import { asanas } from '@/data/asanas';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -9,9 +9,11 @@ import MuscleExplorer from '@/components/MuscleExplorer';
 
 export default async function MuscleDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const muscle = upperBodyMuscles.find((m) => m.id === id);
+  const muscle = allMuscles.find((m) => m.id === id);
   if (!muscle) notFound();
 
+  const categoryMuscles = allMuscles.filter((m) => m.category === muscle.category);
+  const imageSrc = CATEGORY_IMAGES[muscle.category] ?? '/images/muscles/upper.png';
   const related = asanas.filter((a) => a.target_muscles.includes(muscle.id));
 
   return (
@@ -19,7 +21,7 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
       <PageHeader title={muscle.name_ko} subtitle={muscle.name_en} />
 
       <div className="mb-12 overflow-hidden sm:mb-20">
-        <MuscleExplorer muscles={upperBodyMuscles} muscleId={id} />
+        <MuscleExplorer muscles={categoryMuscles} muscleId={id} imageSrc={imageSrc} />
       </div>
 
       <div className="space-y-12 sm:space-y-16">

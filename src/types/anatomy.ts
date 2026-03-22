@@ -1,8 +1,4 @@
-export type BodyPart = '상체' | '몸통' | '하체' | '호흡';
-export interface Position {
-  top: string;
-  left: string;
-}
+export type BodyPart = '상체' | '복부 및 호흡' | '척추' | '하체';
 
 export interface Muscle {
   id: string;

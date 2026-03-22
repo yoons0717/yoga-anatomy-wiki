@@ -1,5 +1,12 @@
 import { Muscle } from '@/types/anatomy';
 
+export const CATEGORY_IMAGES: Record<string, string> = {
+  상체: '/images/muscles/upper.png',
+  '복부 및 호흡': '/images/muscles/core.png',
+  척추: '/images/muscles/spine.png',
+  하체: '/images/muscles/lower.png',
+};
+
 export const upperBodyMuscles: Muscle[] = [
   {
     id: 'um1',
@@ -219,3 +226,102 @@ export const upperBodyMuscles: Muscle[] = [
     area: { top: '54%', left: '84.5%', width: '13%', height: '3%' },
   },
 ];
+
+export const coreBodyMuscles: Muscle[] = [
+  {
+    id: 'cm1',
+    name_ko: '복직근',
+    name_en: 'Rectus Abdominis',
+    category: '복부 및 호흡',
+    origin: '치골결합(Pubic symphysis), 치골능(Pubic crest)',
+    insertion: '흉골 검상돌기, 5~7번 늑연골(Costal cartilages of ribs 5–7)',
+    action: ['척추 굴곡(Spinal Flexion)', '요추 안정화', '장기 보호', '호기 보조'],
+    description:
+      '골반에서 상복부까지 길게 붙어 있는 근육으로, "식스팩"으로 알려져 있습니다. 척추를 앞으로 굽히는 주요 근육이며, 호흡 시 복강내압을 조절합니다.',
+  },
+  {
+    id: 'cm2',
+    name_ko: '외복사근',
+    name_en: 'External Oblique',
+    category: '복부 및 호흡',
+    origin: '6~12번 늑골',
+    insertion: '장골능, 복건막',
+    action: [
+      '반대측 회전(Contralateral Rotation)',
+      '동측 척추 측굴(Ipsilateral Lateral Flexion)',
+      '척추 굴곡',
+      '복압 상승',
+      '골반 후방경사',
+    ],
+    description:
+      '복부의 장기를 보호하고 압박하며 내장을 받쳐주는 역할을 합니다. 척추를 옆으로 돌리고 굽히는 작용을 하며 골반이 움직일 수 있도록 도와줍니다.',
+  },
+  {
+    id: 'cm3',
+    name_ko: '내복사근',
+    name_en: 'Internal Oblique',
+    category: '복부 및 호흡',
+    origin: '흉요근막(Thoracolumbar fascia), 장골능(Iliac crest), 서혜인대의 외측 1/2',
+    insertion: '10~12번 늑연골, 복건막',
+    action: ['척추 굴곡', '골반 전방경사', '복압 상승'],
+    description:
+      '외복사근 아래에 위치하며, 외복사근과 반대 방향으로 주행하는 근육입니다. 동측 회전을 담당하며 복부 안정화에 기여합니다.',
+  },
+  {
+    id: 'cm4',
+    name_ko: '복횡근',
+    name_en: 'Transversus Abdominis',
+    category: '복부 및 호흡',
+    origin: '흉요근막, 장골능, 서혜인대, 7~12번 늑연골 내면',
+    insertion: '복건막, 백선(Linea alba), 치골',
+    action: ['복압', '척추 안정화', '장기 보호', '호흡 보조 근육'],
+    description:
+      '복부의 가장 깊은 층에 위치한 근육으로, 코르셋처럼 복부를 감싸 척추를 안정시키는 핵심 근육입니다. ',
+  },
+  {
+    id: 'cm5',
+    name_ko: '척추기립근',
+    name_en: 'Erector Spinae',
+    category: '척추',
+    origin: '천골(Sacrum), 장골능(Iliac crest), 흉요근막',
+    insertion: '늑골각(Rib angles), 횡돌기(Transverse processes), 극돌기(Spinous processes)',
+    action: ['척추 신전(Spinal Extension)', '척추 측굴(Lateral Flexion)', '척추 안정화'],
+    description:
+      '척추를 따라 수직으로 주행하는 근육군으로, 장근·최장근·극근으로 구성됩니다. 직립 자세를 유지하고 척추를 뒤로 펴는 주요 근육입니다.',
+  },
+  {
+    id: 'cm6',
+    name_ko: '다열근',
+    name_en: 'Multifidus',
+    category: '척추',
+    origin: '천골 후면, 요추 유돌기(Mammillary processes of lumbar), 흉추 횡돌기, 경추 관절돌기',
+    insertion: '2~4마디 위 척추의 극돌기',
+    action: ['척추 신전', '척추 회전', '척추 분절 안정화'],
+    description:
+      '척추 가장 깊은 층에 위치한 근육으로, 각 척추 마디 사이의 안정성을 제공합니다. 요통 예방에 중요한 핵심 안정화 근육입니다.',
+  },
+  {
+    id: 'cm7',
+    name_ko: '횡격막',
+    name_en: 'Diaphragm',
+    category: '복부 및 호흡',
+    origin: '흉골 검상돌기, 1~3번 요추, 7~12번 늑연골',
+    insertion: '중심건(Central tendon)',
+    action: ['흡기(Inspiration) — 주요 호흡근'],
+    description:
+      '흉강과 복강을 나누는 돔 형태의 근육으로, 호흡 시 수축하여 흉강을 확장시키고 공기를 들이마시는 역할을 합니다. 호흡의 가장 중요한 근육입니다.',
+  },
+  {
+    id: 'cm8',
+    name_ko: '요방형근',
+    name_en: 'Quadratus Lumborum',
+    category: '척추',
+    origin: '장골능 후면(Posterior iliac crest)',
+    insertion: '12번 늑골, 요추 1~4번 횡돌기',
+    action: ['척추 측굴(Lateral Flexion)', '12번 늑골 하강(호기 보조)', '골반 거상', '척추 안정화'],
+    description:
+      '허리 깊은 곳에 위치한 사각형 근육으로, 한쪽으로 허리를 굽히거나 골반을 들어올리는 동작에 관여합니다. 요통의 흔한 원인 중 하나입니다.',
+  },
+];
+
+export const allMuscles: Muscle[] = [...upperBodyMuscles, ...coreBodyMuscles];

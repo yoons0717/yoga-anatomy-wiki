@@ -3,14 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
-import { upperBodyMuscles } from '@/data/muscles';
+import { allMuscles } from '@/data/muscles';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 
 export default function MuscleListPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filtered = upperBodyMuscles.filter(
+  const filtered = allMuscles.filter(
     (m) =>
       m.name_ko.includes(searchTerm) || m.name_en.toLowerCase().includes(searchTerm.toLowerCase()),
   );

@@ -8,9 +8,11 @@ import { ChevronDown } from 'lucide-react';
 export default function MuscleExplorer({
   muscles,
   muscleId,
+  imageSrc,
 }: {
   muscles: Muscle[];
   muscleId: string;
+  imageSrc: string;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(muscleId);
 
@@ -19,7 +21,7 @@ export default function MuscleExplorer({
       <div className="relative mx-auto w-full max-w-105 shrink-0 lg:mx-0 lg:max-w-115">
         <div className="relative aspect-[460/550] w-full">
           <Image
-            src="/images/muscles/upper.png"
+            src={imageSrc}
             alt="Anatomy"
             fill
             className="object-contain opacity-90"
