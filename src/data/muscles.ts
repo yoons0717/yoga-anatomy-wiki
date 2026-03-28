@@ -324,4 +324,161 @@ export const coreBodyMuscles: Muscle[] = [
   },
 ];
 
-export const allMuscles: Muscle[] = [...upperBodyMuscles, ...coreBodyMuscles];
+export const lowerBodyMuscles: Muscle[] = [
+  {
+    id: 'lm1',
+    name_ko: '장요근',
+    name_en: 'Iliopsoas',
+    category: '하체',
+    origin: '장골근 - 장골와(Iliac fossa), 대요근 - 요추 1~5번 횡돌기 및 추체',
+    insertion: '대퇴골 소전자(Lesser trochanter of femur)',
+    action: ['고관절 굴곡(Hip Flexion)', '요추 굴곡', '대퇴골 외회전'],
+    description:
+      '장골근과 대요근이 합쳐진 근육으로, 고관절을 굽히는 가장 강력한 근육입니다. 앉아있는 시간이 길수록 단축되기 쉬우며, 요통과 밀접한 관련이 있습니다.',
+  },
+  {
+    id: 'lm2',
+    name_ko: '대둔근',
+    name_en: 'Gluteus Maximus',
+    category: '하체',
+    origin: '장골 후면, 천골 및 미골 외측, 흉요근막',
+    insertion: '대퇴골 둔근 조면(Gluteal tuberosity), 장경인대(IT band)',
+    action: ['고관절 신전(Hip Extension)', '고관절 외회전(External Rotation)', '고관절 외전(상부)'],
+    description:
+      '엉덩이를 이루는 가장 크고 강력한 근육입니다. 계단 오르기, 달리기, 점프 등 강한 힘이 필요한 동작에서 주로 활성화됩니다.',
+  },
+  {
+    id: 'lm3',
+    name_ko: '중둔근',
+    name_en: 'Gluteus Medius',
+    category: '하체',
+    origin: '장골 외측면(Outer surface of ilium)',
+    insertion: '대퇴골 대전자 외측면(Greater trochanter of femur)',
+    action: ['고관절 외전(Hip Abduction)', '고관절 내회전(Internal Rotation)', '골반 안정화'],
+    description:
+      '대둔근 아래에 위치한 근육으로, 한 발로 서 있을 때 골반이 기울지 않도록 잡아주는 핵심 안정화 근육입니다. 약화 시 트렌델렌버그 보행이 나타납니다.',
+  },
+  {
+    id: 'lm4',
+    name_ko: '소둔근',
+    name_en: 'Gluteus Minimus',
+    category: '하체',
+    origin: '장골 외측면 하부(Outer surface of ilium, below gluteus medius)',
+    insertion: '대퇴골 대전자 전면(Anterior surface of greater trochanter)',
+    action: ['고관절 외전(Hip Abduction)', '고관절 내회전(Internal Rotation)'],
+    description:
+      '중둔근 깊은 곳에 위치한 가장 작은 둔근으로, 중둔근과 함께 골반 안정화에 기여합니다.',
+  },
+  {
+    id: 'lm5',
+    name_ko: '이상근',
+    name_en: 'Piriformis',
+    category: '하체',
+    origin: '천골 전면(Anterior sacrum)',
+    insertion: '대퇴골 대전자 상단(Superior aspect of greater trochanter)',
+    action: ['고관절 외회전(External Rotation)', '고관절 외전(굴곡 시)'],
+    description:
+      '천골에서 대퇴골로 연결되는 심부 외회전근입니다. 좌골신경이 이 근육을 관통하거나 아래를 지나 이상근 증후군의 원인이 되기도 합니다. 요가의 고관절 개방 자세와 밀접한 관련이 있습니다.',
+  },
+  {
+    id: 'lm6',
+    name_ko: '대퇴직근',
+    name_en: 'Rectus Femoris',
+    category: '하체',
+    origin: '전하장골극(AIIS, Anterior inferior iliac spine)',
+    insertion: '슬개골을 통해 경골 조면(Tibial tuberosity via patellar tendon)',
+    action: ['슬관절 신전(Knee Extension)', '고관절 굴곡(Hip Flexion)'],
+    description:
+      '대퇴사두근을 구성하는 4개 근육 중 유일하게 고관절과 슬관절에 걸쳐 있는 이관절근입니다. 달리기와 킥 동작에 중요하며, 단축되면 골반 전방경사를 유발할 수 있습니다.',
+  },
+  {
+    id: 'lm7',
+    name_ko: '대퇴이두근',
+    name_en: 'Biceps Femoris',
+    category: '하체',
+    origin: '장두 - 좌골결절(Ischial tuberosity), 단두 - 대퇴골 조선(Linea aspera)',
+    insertion: '비골두(Head of fibula)',
+    action: ['슬관절 굴곡(Knee Flexion)', '고관절 신전(장두)', '하퇴 외회전'],
+    description:
+      '햄스트링을 구성하는 근육 중 하나로, 무릎 뒤 바깥쪽에 위치합니다. 장두는 고관절에도 작용하는 이관절근이며, 달리기와 점프에서 제동 역할을 합니다.',
+  },
+  {
+    id: 'lm8',
+    name_ko: '반건양근',
+    name_en: 'Semitendinosus',
+    category: '하체',
+    origin: '좌골결절(Ischial tuberosity)',
+    insertion: '경골 내측면 상부 (거위발 부착부, Pes anserinus)',
+    action: ['슬관절 굴곡(Knee Flexion)', '고관절 신전(Hip Extension)', '하퇴 내회전'],
+    description:
+      '햄스트링 내측을 구성하는 근육으로, 무릎 뒤 안쪽에 위치합니다. 이름처럼 힘줄 부분이 길게 이어집니다.',
+  },
+  {
+    id: 'lm9',
+    name_ko: '반막양근',
+    name_en: 'Semimembranosus',
+    category: '하체',
+    origin: '좌골결절(Ischial tuberosity)',
+    insertion: '경골 내측과(Medial condyle of tibia)',
+    action: ['슬관절 굴곡(Knee Flexion)', '고관절 신전(Hip Extension)', '하퇴 내회전'],
+    description:
+      '반건양근 아래 깊은 곳에 위치한 햄스트링 근육입니다. 넓은 막 형태의 근육 시작부가 특징이며, 무릎 관절낭 안정화에도 기여합니다.',
+  },
+  {
+    id: 'lm10',
+    name_ko: '장내전근',
+    name_en: 'Adductor Longus',
+    category: '하체',
+    origin: '치골 상지(Superior pubic ramus)',
+    insertion: '대퇴골 조선 중 1/3(Middle third of linea aspera)',
+    action: ['고관절 내전(Hip Adduction)', '고관절 굴곡(보조)', '고관절 외회전(보조)'],
+    description:
+      '사타구니 안쪽에 위치한 내전근으로, 내전근군 중 가장 표면에 있습니다. 발레, 요가에서 다리를 모으는 동작에 주로 관여합니다.',
+  },
+  {
+    id: 'lm11',
+    name_ko: '대내전근',
+    name_en: 'Adductor Magnus',
+    category: '하체',
+    origin: '좌골결절 및 치골 하지(Ischial tuberosity and inferior pubic ramus)',
+    insertion: '대퇴골 조선 전체 및 내측 상과(Medial epicondyle of femur)',
+    action: ['고관절 내전(Hip Adduction)', '고관절 신전(후부)', '고관절 굴곡(전부)'],
+    description:
+      '내전근군 중 가장 크고 강력한 근육입니다. 전부는 내전/굴곡, 후부는 내전/신전을 담당하여 이중적인 역할을 합니다.',
+  },
+  {
+    id: 'lm12',
+    name_ko: '비복근',
+    name_en: 'Gastrocnemius',
+    category: '하체',
+    origin: '내측두 - 대퇴골 내측과, 외측두 - 대퇴골 외측과',
+    insertion: '아킬레스건을 통해 종골(Calcaneus via Achilles tendon)',
+    action: ['족저굴곡(Plantar Flexion)', '슬관절 굴곡(보조)'],
+    description:
+      '종아리 뒤쪽의 가장 두드러진 근육으로, 두 개의 머리를 가집니다. 발뒤꿈치를 들어올리는 주요 근육이며, 점프와 달리기에 핵심적으로 관여합니다.',
+  },
+  {
+    id: 'lm13',
+    name_ko: '가자미근',
+    name_en: 'Soleus',
+    category: '하체',
+    origin: '비골 후면 상부, 경골 후면(Soleal line)',
+    insertion: '아킬레스건을 통해 종골(Calcaneus via Achilles tendon)',
+    action: ['족저굴곡(Plantar Flexion)'],
+    description:
+      '비복근 아래에 위치한 근육으로, 슬관절에 걸치지 않는 단관절근입니다. 서 있을 때 자세 유지와 보행 시 지속적인 지지 역할을 합니다.',
+  },
+  {
+    id: 'lm14',
+    name_ko: '대퇴근막장근',
+    name_en: 'Tensor Fasciae Latae',
+    category: '하체',
+    origin: '전상장골극(ASIS, Anterior superior iliac spine)',
+    insertion: '장경인대(IT band) → 경골 외측과',
+    action: ['고관절 굴곡(Hip Flexion)', '고관절 외전(Abduction)', '고관절 내회전(Internal Rotation)'],
+    description:
+      '장경인대(IT band)를 통해 힘을 전달하는 근육으로, 달리기 선수에게 흔한 장경인대 증후군과 밀접한 관련이 있습니다. 과도하게 단축되면 무릎 외측 통증을 유발할 수 있습니다.',
+  },
+];
+
+export const allMuscles: Muscle[] = [...upperBodyMuscles, ...coreBodyMuscles, ...lowerBodyMuscles];
