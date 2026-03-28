@@ -23,6 +23,7 @@ export interface Asana {
   name_en: string; // 예: Cobra Pose
   name_sanskrit: string; // 예: Bhujangasana
   description: string; // 간단한 설명
-  target_muscles: string[]; // 연결될 근육의 ID 목록 (예: ["m1", "m2"])
+  activated_muscles: string[]; // 수축(강화)되는 근육 ID 목록
+  stretched_muscles: string[]; // 이완(스트레칭)되는 근육 ID 목록
   imageUrl?: string;
 }

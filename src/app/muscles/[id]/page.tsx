@@ -14,7 +14,9 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
 
   const categoryMuscles = allMuscles.filter((m) => m.category === muscle.category);
   const imageSrc = CATEGORY_IMAGES[muscle.category] ?? '/images/muscles/upper.png';
-  const related = asanas.filter((a) => a.target_muscles.includes(muscle.id));
+  const related = asanas.filter(
+    (a) => a.activated_muscles.includes(muscle.id) || a.stretched_muscles.includes(muscle.id)
+  );
 
   return (
     <PageWrapper>
