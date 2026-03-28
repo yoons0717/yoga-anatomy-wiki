@@ -1,5 +1,6 @@
 'use client';
 
+import { AsanaPosition } from '@/types/anatomy';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Search, Wind } from 'lucide-react';
@@ -7,15 +8,27 @@ import { asanas } from '@/data/asanas';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 
+const POSITION_LABELS: Record<AsanaPosition, string> = {
+  standing: '선 자세',
+  seated: '앉은 자세',
+  prone: '엎드린 자세',
+  supine: '누운 자세',
+};
+
+const POSITIONS: AsanaPosition[] = ['standing', 'seated', 'prone', 'supine'];
+
 export default function AsanaListPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [activePosition, setActivePosition] = useState<AsanaPosition | null>(null);
 
-  const filtered = asanas.filter(
-    (a) =>
+  const filtered = asanas.filter((a) => {
+    const matchesSearch =
       a.name_ko.includes(searchTerm) ||
       a.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      a.name_sanskrit.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+      a.name_sanskrit.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesPosition = activePosition === null || a.position === activePosition;
+    return matchesSearch && matchesPosition;
+  });
 
   return (
     <PageWrapper>
@@ -23,7 +36,7 @@ export default function AsanaListPage() {
         title="Asana Index"
         subtitle="The sacred geometry of the human body in stillness and flow."
       />
-      <div className="relative mb-10 max-w-md sm:mb-16">
+      <div className="relative mb-8 max-w-md sm:mb-10">
         <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-stone-300" />
         <input
           className="w-full border-b border-stone-200 bg-transparent pb-3 pl-10 text-[15px] text-stone-900 transition-all outline-none placeholder:text-stone-300 focus:border-stone-500 sm:pb-4 sm:text-base"
@@ -31,6 +44,32 @@ export default function AsanaListPage() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+      </div>
+
+      <div className="mb-10 flex flex-wrap gap-2 sm:mb-16">
+        <button
+          onClick={() => setActivePosition(null)}
+          className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+            activePosition === null
+              ? 'border-stone-800 bg-stone-800 text-white'
+              : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
+          }`}
+        >
+          전체
+        </button>
+        {POSITIONS.map((pos) => (
+          <button
+            key={pos}
+            onClick={() => setActivePosition(activePosition === pos ? null : pos)}
+            className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+              activePosition === pos
+                ? 'border-stone-800 bg-stone-800 text-white'
+                : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
+            }`}
+          >
+            {POSITION_LABELS[pos]}
+          </button>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -42,7 +81,6 @@ export default function AsanaListPage() {
           >
             <div className="space-y-5 sm:space-y-6">
               <div className="flex items-start justify-between">
-                {/* 아사나 전용 아이콘 */}
                 <Wind className="h-4 w-4 text-stone-200 transition-all duration-500 group-hover:rotate-180 group-hover:text-stone-800" />
                 <div className="h-1 w-1 rounded-full bg-stone-200 sm:group-hover:bg-stone-400" />
               </div>
@@ -52,7 +90,6 @@ export default function AsanaListPage() {
                   {a.name_ko}
                 </h3>
                 <div className="space-y-1">
-                  {/* 카테고리 대신 산스크리트어 명칭 배치 (에러 해결) */}
                   <p className="font-serif text-[10px] text-stone-500 italic sm:text-[11px] sm:group-hover:text-stone-700">
                     {a.name_sanskrit}
                   </p>

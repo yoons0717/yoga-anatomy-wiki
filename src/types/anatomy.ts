@@ -1,5 +1,7 @@
 export type BodyPart = '상체' | '복부 및 호흡' | '척추' | '하체';
 
+export type AsanaPosition = 'standing' | 'seated' | 'prone' | 'supine';
+
 export interface Muscle {
   id: string;
   name_ko: string; // 예: 소흉근
@@ -23,6 +25,7 @@ export interface Asana {
   name_en: string; // 예: Cobra Pose
   name_sanskrit: string; // 예: Bhujangasana
   description: string; // 간단한 설명
+  position: AsanaPosition; // 자세 유형
   activated_muscles: string[]; // 수축(강화)되는 근육 ID 목록
   stretched_muscles: string[]; // 이완(스트레칭)되는 근육 ID 목록
   imageUrl?: string;
