@@ -73,6 +73,11 @@ export default function AsanaListPage() {
         ))}
       </div>
 
+      {filtered.length === 0 ? (
+        <div className="py-24 text-center">
+          <p className="text-[13px] text-stone-400">검색 결과가 없습니다.</p>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((a) => (
           <Link
@@ -120,6 +125,7 @@ export default function AsanaListPage() {
           </Link>
         ))}
       </div>
+      )}
     </PageWrapper>
   );
 }

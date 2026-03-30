@@ -29,27 +29,20 @@
 
 ### API Route (`src/app/api/chat/route.ts`)
 
-- [ ] `POST /api/chat` 엔드포인트 구현
-- [ ] `muscles[]` + `asanas[]` 전체를 시스템 프롬프트에 주입
-- [ ] **Structured output** 강제:
-  ```json
-  {
-    "answer": "설명 텍스트",
-    "related_muscles": ["um1", "um3"],
-    "related_asanas": ["a2", "a7"]
-  }
-  ```
-- [ ] **스트리밍** 적용 (`ReadableStream`) — `answer` 필드는 스트리밍, 나머지는 후처리
-- [ ] 입력 검증 및 에러 핸들링 (빈 쿼리, API 실패)
+~~- `POST /api/chat` 엔드포인트 구현~~
+~~- `muscles[]` + `asanas[]` 전체를 시스템 프롬프트에 주입~~
+~~- **Structured output** 강제 (`answer` + `related_muscles` + `related_asanas`)~~
+~~- **스트리밍** 적용 (`ReadableStream`) — `answer` 필드는 스트리밍, 나머지는 후처리~~
+~~- 입력 검증 및 에러 핸들링 (빈 쿼리, API 실패)~~
 
-### UI (`src/app/chat/page.tsx` 또는 전역 플로팅 버튼)
+### UI (`src/app/chat/page.tsx`)
 
-- [ ] 질문 입력창 + 전송 버튼
-- [ ] 질문 예시 칩 UI (예: "어깨 외회전이 안 돼요", "햄스트링이 항상 땡겨요")
-- [ ] 스트리밍 텍스트 렌더링 (타이핑 효과)
-- [ ] 응답 완료 후 관련 근육/아사나 **링크 카드** 렌더링
-- [ ] 로딩 상태 (skeleton / 점 애니메이션)
-- [ ] 에러 상태 UI
+~~- 질문 입력창 + 전송 버튼~~
+~~- 질문 예시 칩 UI (예: "어깨 외회전이 안 돼요", "햄스트링이 항상 땡겨요")~~
+~~- 스트리밍 텍스트 렌더링 (타이핑 효과)~~
+~~- 응답 완료 후 관련 근육/아사나 **링크 카드** 렌더링~~
+~~- 로딩 상태 (점 애니메이션)~~
+~~- 에러 상태 UI~~
 
 ### 최적화 (데이터 증가 후)
 
@@ -59,15 +52,12 @@
 
 ## Phase 2. 검색 고도화
 
-> 현재 단순 `string.includes()` → 퍼지 검색 + URL 동기화
+> 현재 단순 `string.includes()` → 카테고리 필터 + 빈 결과 처리
 
-- [ ] **Fuse.js** 도입 — 오타 허용, 유사도 기반 정렬
-  - 검색 대상: `name_ko`, `name_en`, `name_sanskrit`
-- [ ] **URL 쿼리 파라미터 동기화** — `?q=어깨&category=상체`
-  - `useSearchParams` + `useRouter` 활용
-  - 공유/북마크 가능
-- [ ] **카테고리 필터** UI — 상체 / 하체 / 척추 / 복부 탭 or 드롭다운
-- [ ] 검색 결과 없음 상태 UI
+~~- **카테고리 필터** UI — muscles: 상체/하체/척추/복부 탭 (asanas position 필터는 기존 완료)~~
+~~- 검색 결과 없음 상태 UI~~
+
+> Fuse.js, URL 동기화는 실용성 낮아 제외
 
 ---
 

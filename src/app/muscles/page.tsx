@@ -1,5 +1,6 @@
 'use client';
 
+import { BodyPart } from '@/types/anatomy';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
@@ -7,13 +8,18 @@ import { allMuscles } from '@/data/muscles';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 
+const CATEGORIES: BodyPart[] = ['상체', '하체', '척추', '복부 및 호흡'];
+
 export default function MuscleListPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState<BodyPart | null>(null);
 
-  const filtered = allMuscles.filter(
-    (m) =>
-      m.name_ko.includes(searchTerm) || m.name_en.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const filtered = allMuscles.filter((m) => {
+    const matchesSearch =
+      m.name_ko.includes(searchTerm) || m.name_en.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeCategory === null || m.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <PageWrapper>
@@ -22,7 +28,7 @@ export default function MuscleListPage() {
         subtitle="Exploring anatomical structures through mindful observation."
       />
 
-      <div className="relative mb-10 max-w-md sm:mb-16">
+      <div className="relative mb-8 max-w-md sm:mb-10">
         <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-stone-300" />
         <input
           className="w-full border-b border-stone-200 bg-transparent pb-3 pl-10 text-[15px] text-stone-900 transition-all outline-none placeholder:text-stone-300 focus:border-stone-500 sm:pb-4 sm:text-base"
@@ -32,6 +38,37 @@ export default function MuscleListPage() {
         />
       </div>
 
+      <div className="mb-10 flex flex-wrap gap-2 sm:mb-16">
+        <button
+          onClick={() => setActiveCategory(null)}
+          className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+            activeCategory === null
+              ? 'border-stone-800 bg-stone-800 text-white'
+              : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
+          }`}
+        >
+          전체
+        </button>
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+            className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+              activeCategory === cat
+                ? 'border-stone-800 bg-stone-800 text-white'
+                : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="py-24 text-center">
+          <p className="text-[13px] text-stone-400">검색 결과가 없습니다.</p>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((m) => (
           <Link
@@ -62,6 +99,7 @@ export default function MuscleListPage() {
           </Link>
         ))}
       </div>
+      )}
     </PageWrapper>
   );
 }
