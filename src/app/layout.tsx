@@ -30,6 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/asanas" className="transition hover:text-slate-950">
                 ASANAS
               </Link>
+              <Link href="/chat" className="transition hover:text-slate-950">
+                ASK
+              </Link>
             </nav>
           </div>
         </header>
