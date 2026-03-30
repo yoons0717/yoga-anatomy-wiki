@@ -3,6 +3,7 @@
 import { AsanaPosition } from '@/types/anatomy';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Wind } from 'lucide-react';
 import { asanas } from '@/data/asanas';
 import PageWrapper from '@/components/PageWrapper';
@@ -77,14 +78,24 @@ export default function AsanaListPage() {
           <Link
             href={`/asanas/${a.id}`}
             key={a.id}
-            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] sm:rounded-4xl sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
+            className="group flex flex-col overflow-hidden rounded-4xl border border-stone-100 bg-stone-50/50 transition-all active:scale-[0.98] sm:rounded-4xl sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
           >
-            <div className="space-y-5 sm:space-y-6">
-              <div className="flex items-start justify-between">
-                <Wind className="h-4 w-4 text-stone-200 transition-all duration-500 group-hover:rotate-180 group-hover:text-stone-800" />
-                <div className="h-1 w-1 rounded-full bg-stone-200 sm:group-hover:bg-stone-400" />
-              </div>
+            <div className="relative h-44 overflow-hidden bg-white">
+              {a.imageUrl ? (
+                <Image
+                  src={a.imageUrl}
+                  alt={a.name_ko}
+                  fill
+                  className="object-contain p-3 transition-transform duration-500 sm:group-hover:scale-105"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center bg-stone-100">
+                  <Wind className="h-6 w-6 text-stone-200 transition-all duration-500 group-hover:rotate-180 group-hover:text-stone-400" />
+                </div>
+              )}
+            </div>
 
+            <div className="flex flex-col justify-between p-7 sm:p-9">
               <div className="space-y-2">
                 <h3 className="text-lg font-bold tracking-tight text-stone-800 sm:text-xl sm:group-hover:text-black">
                   {a.name_ko}
@@ -98,13 +109,13 @@ export default function AsanaListPage() {
                   </p>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-8 flex items-center gap-2 opacity-60 transition-all sm:mt-10 sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
-              <span className="text-[9px] font-black tracking-tighter text-stone-800 uppercase">
-                Practice Guide
-              </span>
-              <div className="h-px w-4 bg-stone-800" />
+              <div className="mt-8 flex items-center gap-2 opacity-60 transition-all sm:mt-10 sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
+                <span className="text-[9px] font-black tracking-tighter text-stone-800 uppercase">
+                  Practice Guide
+                </span>
+                <div className="h-px w-4 bg-stone-800" />
+              </div>
             </div>
           </Link>
         ))}

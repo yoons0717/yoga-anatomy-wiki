@@ -21,12 +21,12 @@ export default async function AsanaDetailPage({ params }: { params: Promise<{ id
       <PageHeader title={asana.name_ko} subtitle={asana.name_sanskrit} />
 
       {asana.imageUrl && (
-        <div className="mb-12 sm:mb-20">
+        <div className="mb-12 flex justify-center sm:mb-20">
           <Image
             src={asana.imageUrl}
             alt={asana.name_ko}
-            className="h-auto w-full rounded-3xl border border-stone-100 shadow-lg"
-            width={600}
+            className="h-auto w-full max-w-xs rounded-3xl border border-stone-100 shadow-lg sm:max-w-sm"
+            width={400}
             height={400}
           />
         </div>
