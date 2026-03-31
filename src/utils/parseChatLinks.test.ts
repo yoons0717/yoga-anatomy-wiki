@@ -37,6 +37,12 @@ describe('parseChatLinks', () => {
   it('빈 JSON 객체인 경우 빈 배열을 반환한다', () => {
     expect(parseChatLinks('<links>{}</links>')).toEqual({ muscles: [], asanas: [] });
   });
+
+  // LLM이 <links> 태그명을 한국어 '링크'로 번역하는 케이스 처리
+  it('링크{ 형식으로 온 경우도 파싱한다', () => {
+    const text = '설명 텍스트입니다.\n링크{"muscles":["um1","um3"],"asanas":["a2"]}</links>';
+    expect(parseChatLinks(text)).toEqual({ muscles: ['um1', 'um3'], asanas: ['a2'] });
+  });
 });
 
 describe('stripChatLinks', () => {
@@ -47,5 +53,15 @@ describe('stripChatLinks', () => {
 
   it('<links> 태그가 없으면 원본 텍스트를 반환한다', () => {
     expect(stripChatLinks('일반 텍스트')).toBe('일반 텍스트');
+  });
+
+  it('링크{ 형식도 제거한다', () => {
+    const text = '설명 텍스트입니다.\n링크{"muscles":["um1"],"asanas":[]}</links>';
+    expect(stripChatLinks(text)).toBe('설명 텍스트입니다.');
+  });
+
+  it('<links> 앞에 대시 prefix가 있어도 제거한다', () => {
+    const text = '설명 텍스트입니다.\n- <links>{"muscles":["um1"],"asanas":[]}</links>';
+    expect(stripChatLinks(text)).toBe('설명 텍스트입니다.');
   });
 });
