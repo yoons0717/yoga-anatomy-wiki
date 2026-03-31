@@ -1,7 +1,7 @@
 # 개발 계획 — Anatomy Archive
 
 > 포트폴리오 완성도를 높이기 위한 구현 계획입니다.
-> 우선순위 순으로 작업하세요. 완료된 항목은 취소선으로 표시합니다.
+> 우선순위 순으로 작업하세요. 완료된 항목은 `- [x]`로 표시합니다.
 
 ---
 
@@ -11,15 +11,15 @@
 
 ### 근육 데이터 (`src/data/muscles.ts`)
 
-~~- **하체 근육** 추가 — 햄스트링, 대퇴사두근, 내전근, 비복근, 장요근 등~~
-~~- **척추 근육** 추가 — 척추기립근, 다열근, 요방형근 등~~
-~~- **복부/호흡 근육** 추가 — 복직근, 복횡근, 횡격막 등 (일부 있음, 보완)~~
+- [x] **하체 근육** 추가 — 햄스트링, 대퇴사두근, 내전근, 비복근, 장요근 등
+- [x] **척추 근육** 추가 — 척추기립근, 다열근, 요방형근 등
+- [x] **복부/호흡 근육** 추가 — 복직근, 복횡근, 횡격막 등 (일부 있음, 보완)
 
 ### 아사나 데이터 (`src/data/asanas.ts`)
 
-~~- 현재 15개 → 30개 이상으로 확장~~
-~~- 하체 위주 아사나 추가 — 전사 자세, 삼각 자세, 비라바드라사나 등~~
-~~- 각 아사나 `activated_muscles` / `stretched_muscles` ID 정확히 연결~~
+- [x] 현재 15개 → 30개 이상으로 확장
+- [x] 하체 위주 아사나 추가 — 전사 자세, 삼각 자세, 비라바드라사나 등
+- [x] 각 아사나 `activated_muscles` / `stretched_muscles` ID 정확히 연결
 
 ---
 
@@ -29,20 +29,20 @@
 
 ### API Route (`src/app/api/chat/route.ts`)
 
-~~- `POST /api/chat` 엔드포인트 구현~~
-~~- `muscles[]` + `asanas[]` 전체를 시스템 프롬프트에 주입~~
-~~- **Structured output** 강제 (`answer` + `related_muscles` + `related_asanas`)~~
-~~- **스트리밍** 적용 (`ReadableStream`) — `answer` 필드는 스트리밍, 나머지는 후처리~~
-~~- 입력 검증 및 에러 핸들링 (빈 쿼리, API 실패)~~
+- [x] `POST /api/chat` 엔드포인트 구현
+- [x] `muscles[]` + `asanas[]` 전체를 시스템 프롬프트에 주입
+- [x] **Structured output** 강제 (`answer` + `related_muscles` + `related_asanas`)
+- [x] **스트리밍** 적용 (`ReadableStream`) — `answer` 필드는 스트리밍, 나머지는 후처리
+- [x] 입력 검증 및 에러 핸들링 (빈 쿼리, API 실패)
 
 ### UI (`src/app/chat/page.tsx`)
 
-~~- 질문 입력창 + 전송 버튼~~
-~~- 질문 예시 칩 UI (예: "어깨 외회전이 안 돼요", "햄스트링이 항상 땡겨요")~~
-~~- 스트리밍 텍스트 렌더링 (타이핑 효과)~~
-~~- 응답 완료 후 관련 근육/아사나 **링크 카드** 렌더링~~
-~~- 로딩 상태 (점 애니메이션)~~
-~~- 에러 상태 UI~~
+- [x] 질문 입력창 + 전송 버튼
+- [x] 질문 예시 칩 UI (예: "어깨 외회전이 안 돼요", "햄스트링이 항상 땡겨요")
+- [x] 스트리밍 텍스트 렌더링 (타이핑 효과)
+- [x] 응답 완료 후 관련 근육/아사나 **링크 카드** 렌더링
+- [x] 로딩 상태 (점 애니메이션)
+- [x] 에러 상태 UI
 
 ### 최적화 (데이터 증가 후)
 
@@ -54,8 +54,8 @@
 
 > 현재 단순 `string.includes()` → 카테고리 필터 + 빈 결과 처리
 
-~~- **카테고리 필터** UI — muscles: 상체/하체/척추/복부 탭 (asanas position 필터는 기존 완료)~~
-~~- 검색 결과 없음 상태 UI~~
+- [x] **카테고리 필터** UI — muscles: 상체/하체/척추/복부 탭 (asanas position 필터는 기존 완료)
+- [x] 검색 결과 없음 상태 UI
 
 > Fuse.js, URL 동기화는 실용성 낮아 제외
 
@@ -75,10 +75,10 @@
 
 ### 테스트 (Vitest + Testing Library)
 
-~~- 테스트 환경 세팅 (`vitest.config.ts`, `@testing-library/react`)~~
-~~- `MuscleExplorer` 컴포넌트 테스트 — 클릭 시 선택 상태 변경~~
-~~- 검색 로직 유닛 테스트~~
-~~- LLM 응답 파싱 함수 테스트~~
+- [x] 테스트 환경 세팅 (`vitest.config.ts`, `@testing-library/react`)
+- [x] LLM 응답 파싱 함수 테스트 (`parseChatLinks`)
+- [x] 데이터 무결성 테스트 (`integrity.test.ts`)
+- [x] 유틸 함수 분리 (`filterMuscles`, `filterAsanas`, `parseChatLinks`, `stripChatLinks`)
 
 ### 접근성 (a11y)
 
