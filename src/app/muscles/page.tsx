@@ -37,7 +37,7 @@ export default function MuscleListPage() {
       <div className="mb-10 flex flex-wrap gap-2 sm:mb-16">
         <button
           onClick={() => setActiveCategory(null)}
-          className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+          className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 ${
             activeCategory === null
               ? 'border-stone-800 bg-stone-800 text-white'
               : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
@@ -49,7 +49,7 @@ export default function MuscleListPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-            className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+            className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 ${
               activeCategory === cat
                 ? 'border-stone-800 bg-stone-800 text-white'
                 : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
@@ -70,7 +70,7 @@ export default function MuscleListPage() {
           <Link
             href={`/muscles/${m.id}`}
             key={m.id}
-            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] sm:rounded-4xl sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
+            className="group flex flex-col justify-between rounded-4xl border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 sm:rounded-4xl sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
           >
             <div className="space-y-6">
               <div className="flex items-start justify-between">
@@ -81,7 +81,7 @@ export default function MuscleListPage() {
                 <h3 className="text-xl font-bold tracking-tight text-stone-800 group-hover:text-black">
                   {m.name_ko}
                 </h3>
-                <p className="text-[11px] font-bold tracking-widest text-stone-400 uppercase group-hover:text-stone-500">
+                <p className="text-[11px] font-bold tracking-widest text-stone-500 uppercase group-hover:text-stone-600">
                   {m.name_en}
                 </p>
               </div>

@@ -65,7 +65,7 @@ function MuscleCard({ id, nameKo, nameEn }: { id: string; nameKo: string; nameEn
   return (
     <Link
       href={`/muscles/${id}`}
-      className="group flex flex-col justify-between rounded-[2rem] border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
+      className="group flex flex-col justify-between rounded-[2rem] border border-stone-100 bg-stone-50/50 p-7 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 sm:p-9 sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
     >
       <div className="space-y-2">
         <h3 className="text-lg font-bold tracking-tight text-stone-800 sm:group-hover:text-black">

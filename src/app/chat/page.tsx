@@ -94,7 +94,7 @@ export default function ChatPage() {
               handleSubmit(q);
             }}
             disabled={isLoading}
-            className="rounded-full border border-stone-200 px-4 py-1.5 text-[12px] font-medium text-stone-500 transition-all hover:border-stone-400 hover:text-stone-700 disabled:opacity-40"
+            className="rounded-full border border-stone-200 px-4 py-1.5 text-[12px] font-medium text-stone-500 transition-all hover:border-stone-400 hover:text-stone-700 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2"
           >
             {q}
           </button>
@@ -118,7 +118,7 @@ export default function ChatPage() {
         <button
           onClick={() => handleSubmit(query)}
           disabled={isLoading || !query.trim()}
-          className="absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-xl bg-stone-800 text-white transition-all hover:bg-stone-900 disabled:opacity-40"
+          className="absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-xl bg-stone-800 text-white transition-all hover:bg-stone-900 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-300 focus-visible:ring-offset-2"
         >
           {isLoading ? (
             <Loader2 className="h-4 w-4 animate-spin" />

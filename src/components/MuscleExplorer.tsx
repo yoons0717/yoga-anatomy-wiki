@@ -9,11 +9,13 @@ export default function MuscleExplorer({
   muscles,
   muscleId,
   imageSrc,
+  imageAlt = '근육 해부도',
   showList = true,
 }: {
   muscles: Muscle[];
   muscleId?: string;
   imageSrc: string;
+  imageAlt?: string;
   showList?: boolean;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(muscleId);
@@ -24,7 +26,7 @@ export default function MuscleExplorer({
         <div className="relative aspect-[460/550] w-full">
           <Image
             src={imageSrc}
-            alt="Anatomy"
+            alt={imageAlt}
             fill
             className="object-contain opacity-90"
             priority
@@ -33,8 +35,18 @@ export default function MuscleExplorer({
           {muscles.map((m) => (
             <div
               key={m.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`${m.name_ko} 영역 선택`}
+              aria-pressed={selectedId === m.id}
               onClick={() => setSelectedId(m.id)}
-              className={`absolute z-10 cursor-pointer rounded-full transition-all duration-300 ${
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedId(m.id);
+                }
+              }}
+              className={`absolute z-10 cursor-pointer rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-1 ${
                 selectedId === m.id
                   ? 'bg-sky-500/20 shadow-lg ring-2 ring-sky-400/30'
                   : 'bg-stone-900/10 hover:bg-sky-500/10'
@@ -59,7 +71,9 @@ export default function MuscleExplorer({
             >
               <button
                 onClick={() => setSelectedId(selectedId === m.id ? null : m.id)}
-                className={`flex w-full items-center justify-between p-4 text-left transition-all sm:p-5 ${
+                aria-expanded={selectedId === m.id}
+                aria-controls={`muscle-panel-${m.id}`}
+                className={`flex w-full items-center justify-between p-4 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-inset sm:p-5 ${
                   selectedId === m.id ? 'text-stone-900' : 'text-stone-500 hover:text-stone-800'
                 }`}
               >
@@ -75,6 +89,8 @@ export default function MuscleExplorer({
               </button>
 
               <div
+                id={`muscle-panel-${m.id}`}
+                role="region"
                 className={`grid transition-all duration-300 ease-in-out ${
                   selectedId === m.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                 }`}

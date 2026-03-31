@@ -44,7 +44,7 @@ export default function AsanaListPage() {
       <div className="mb-10 flex flex-wrap gap-2 sm:mb-16">
         <button
           onClick={() => setActivePosition(null)}
-          className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+          className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 ${
             activePosition === null
               ? 'border-stone-800 bg-stone-800 text-white'
               : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
@@ -56,7 +56,7 @@ export default function AsanaListPage() {
           <button
             key={pos}
             onClick={() => setActivePosition(activePosition === pos ? null : pos)}
-            className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all ${
+            className={`rounded-full border px-4 py-1.5 text-[12px] font-bold tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 ${
               activePosition === pos
                 ? 'border-stone-800 bg-stone-800 text-white'
                 : 'border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-600'
@@ -77,7 +77,7 @@ export default function AsanaListPage() {
           <Link
             href={`/asanas/${a.id}`}
             key={a.id}
-            className="group flex flex-col overflow-hidden rounded-4xl border border-stone-100 bg-stone-50/50 transition-all active:scale-[0.98] sm:rounded-4xl sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
+            className="group flex flex-col overflow-hidden rounded-4xl border border-stone-100 bg-stone-50/50 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 sm:rounded-4xl sm:hover:-translate-y-1 sm:hover:bg-white sm:hover:shadow-xl sm:hover:shadow-stone-200/40"
           >
             <div className="relative h-44 overflow-hidden bg-white">
               {a.imageUrl ? (
@@ -103,7 +103,7 @@ export default function AsanaListPage() {
                   <p className="font-serif text-[10px] text-stone-500 italic sm:text-[11px] sm:group-hover:text-stone-700">
                     {a.name_sanskrit}
                   </p>
-                  <p className="text-[9px] font-bold tracking-widest text-stone-400 uppercase sm:text-[10px]">
+                  <p className="text-[9px] font-bold tracking-widest text-stone-500 uppercase sm:text-[10px]">
                     {a.name_en}
                   </p>
                 </div>

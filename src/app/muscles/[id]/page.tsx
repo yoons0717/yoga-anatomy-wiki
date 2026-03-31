@@ -23,7 +23,12 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
       <PageHeader title={muscle.name_ko} subtitle={muscle.name_en} />
 
       <div className="mb-12 overflow-hidden sm:mb-20">
-        <MuscleExplorer muscles={categoryMuscles} muscleId={id} imageSrc={imageSrc} />
+        <MuscleExplorer
+          muscles={categoryMuscles}
+          muscleId={id}
+          imageSrc={imageSrc}
+          imageAlt={`${muscle.category} 근육 해부도`}
+        />
       </div>
 
       <div className="space-y-12 sm:space-y-16">
@@ -66,7 +71,7 @@ export default async function MuscleDetailPage({ params }: { params: Promise<{ i
             <Link
               href={`/asanas/${a.id}`}
               key={a.id}
-              className="group rounded-[2rem] border border-stone-100 bg-white p-7 transition-all active:scale-95 sm:p-8 sm:hover:-translate-y-1 sm:hover:bg-stone-900 sm:hover:shadow-xl sm:hover:shadow-stone-200/50"
+              className="group rounded-[2rem] border border-stone-100 bg-white p-7 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2 sm:p-8 sm:hover:-translate-y-1 sm:hover:bg-stone-900 sm:hover:shadow-xl sm:hover:shadow-stone-200/50"
             >
               <h4 className="text-lg font-bold text-stone-800 transition-colors group-hover:text-white">
                 {a.name_ko}
