@@ -3,13 +3,11 @@
 import { BodyPart } from '@/types/anatomy';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { CATEGORY_IMAGES, upperBodyMuscles, coreBodyMuscles, lowerBodyMuscles } from '@/data/muscles';
+import { CATEGORY_IMAGES, allMuscles } from '@/data/muscles';
 
 const CATEGORIES: BodyPart[] = ['상체', '하체', '척추', '복부 및 호흡'];
 const DEFAULT_WIDTH = '12%';
 const DEFAULT_HEIGHT = '3%';
-
-const allMuscles = [...upperBodyMuscles, ...lowerBodyMuscles, ...coreBodyMuscles];
 
 export default function MapperPage() {
   const [activeCategory, setActiveCategory] = useState<BodyPart>('상체');
@@ -47,13 +45,11 @@ export default function MapperPage() {
             }`}
           >
             {cat}
-            {activeCategory === cat && (
-              <span className="ml-3 text-[11px] text-stone-400">
-                {allMuscles.filter((m) => m.category === cat && m.area).length} / {allMuscles.filter((m) => m.category === cat).length} 매핑됨
-              </span>
-            )}
           </button>
         ))}
+        <span className="ml-3 text-[11px] text-stone-400">
+          {mappedMuscles.length} / {categoryMuscles.length} 매핑됨
+        </span>
       </div>
 
       <div className="mb-6 flex items-center gap-2">
