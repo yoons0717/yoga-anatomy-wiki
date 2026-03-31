@@ -1,6 +1,7 @@
 import Groq from 'groq-sdk';
 import { allMuscles } from '@/data/muscles';
 import { asanas } from '@/data/asanas';
+import { parseChatLinks } from '@/utils/parseChatLinks';
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
@@ -73,17 +74,10 @@ export async function POST(req: Request) {
           }
         }
 
-        const match = fullText.match(/<links>([\s\S]*?)<\/links>/);
-        if (match) {
-          try {
-            const links = JSON.parse(match[1]);
-            const linksPayload = JSON.stringify({
-              type: 'links',
-              muscles: links.muscles ?? [],
-              asanas: links.asanas ?? [],
-            });
-            controller.enqueue(encoder.encode(`data: ${linksPayload}\n\n`));
-          } catch {}
+        const links = parseChatLinks(fullText);
+        if (links.muscles.length > 0 || links.asanas.length > 0) {
+          const linksPayload = JSON.stringify({ type: 'links', ...links });
+          controller.enqueue(encoder.encode(`data: ${linksPayload}\n\n`));
         }
 
         controller.enqueue(encoder.encode('data: [DONE]\n\n'));
