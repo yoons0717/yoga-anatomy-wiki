@@ -1,13 +1,15 @@
 'use client';
 
-import { BodyPart } from '@/types/anatomy';
-import { useState, useRef } from 'react';
+import { BodyPart, Muscle } from '@/types/anatomy';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { CATEGORY_IMAGES, allMuscles } from '@/data/muscles';
 
 const CATEGORIES: BodyPart[] = ['상체', '하체', '척추', '복부 및 호흡'];
 const DEFAULT_WIDTH = '12%';
 const DEFAULT_HEIGHT = '3%';
+
+type MappedMuscle = Muscle & { area: NonNullable<Muscle['area']> };
 
 export default function MapperPage() {
   const [activeCategory, setActiveCategory] = useState<BodyPart>('상체');
@@ -18,6 +20,25 @@ export default function MapperPage() {
   const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
   const [dragPreview, setDragPreview] = useState<{ top: string; left: string; width: string; height: string } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const dragPreviewRef = useRef(dragPreview);
+
+  useEffect(() => { dragPreviewRef.current = dragPreview; }, [dragPreview]);
+
+  // Commit drag even when mouse is released outside the image container
+  useEffect(() => {
+    if (!dragStart) return;
+    const handleMouseUp = () => {
+      const dp = dragPreviewRef.current;
+      if (dp) {
+        setOutput(`{ top: '${dp.top}', left: '${dp.left}', width: '${dp.width}', height: '${dp.height}' }`);
+        setCopied(false);
+      }
+      setDragStart(null);
+      setDragPreview(null);
+    };
+    document.addEventListener('mouseup', handleMouseUp);
+    return () => document.removeEventListener('mouseup', handleMouseUp);
+  }, [dragStart]);
 
   const getCoords = (e: React.MouseEvent) => {
     if (!containerRef.current) return null;
@@ -28,7 +49,9 @@ export default function MapperPage() {
   };
 
   const categoryMuscles = allMuscles.filter((m) => m.category === activeCategory);
-  const mappedMuscles = categoryMuscles.filter((m) => m.area);
+  const mappedMuscles = categoryMuscles.filter(
+    (m): m is MappedMuscle => m.area !== undefined
+  );
 
   return (
     <div className="min-h-screen bg-stone-100 p-8">
@@ -75,8 +98,10 @@ export default function MapperPage() {
             ref={containerRef}
             className="relative aspect-[460/550] w-full cursor-crosshair overflow-hidden rounded-2xl border border-stone-200 bg-white"
             onMouseMove={(e) => {
-              const coords = getCoords(e);
-              if (coords) setHoverCoords(coords);
+              if (!dragStart) {
+                const coords = getCoords(e);
+                if (coords) setHoverCoords(coords);
+              }
               if (mode === 'drag' && dragStart && containerRef.current) {
                 const rect = containerRef.current.getBoundingClientRect();
                 const curX = e.clientX - rect.left;
@@ -89,18 +114,12 @@ export default function MapperPage() {
                 });
               }
             }}
-            onMouseLeave={() => { setHoverCoords(null); setDragStart(null); setDragPreview(null); }}
+            onMouseLeave={() => setHoverCoords(null)}
             onMouseDown={(e) => {
               if (mode !== 'drag' || !containerRef.current) return;
               const rect = containerRef.current.getBoundingClientRect();
               setDragStart({ x: e.clientX - rect.left, y: e.clientY - rect.top });
               setDragPreview(null);
-            }}
-            onMouseUp={() => {
-              if (mode !== 'drag' || !dragPreview) return;
-              setOutput(`{ top: '${dragPreview.top}', left: '${dragPreview.left}', width: '${dragPreview.width}', height: '${dragPreview.height}' }`);
-              setCopied(false);
-              setDragStart(null);
             }}
             onClick={(e) => {
               if (mode !== 'click') return;
@@ -121,7 +140,7 @@ export default function MapperPage() {
               <div
                 key={m.id}
                 className="group absolute rounded-sm border border-sky-400 bg-sky-400/20 transition-colors hover:bg-sky-400/40"
-                style={m.area as React.CSSProperties}
+                style={m.area}
               >
                 <span className="pointer-events-none absolute -top-6 left-0 hidden whitespace-nowrap rounded bg-stone-900/80 px-1.5 py-0.5 text-[10px] text-white group-hover:block">
                   {m.name_ko}
