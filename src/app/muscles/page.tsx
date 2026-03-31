@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { allMuscles } from '@/data/muscles';
+import { filterMuscles } from '@/utils/filterMuscles';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 
@@ -14,12 +15,7 @@ export default function MuscleListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<BodyPart | null>(null);
 
-  const filtered = allMuscles.filter((m) => {
-    const matchesSearch =
-      m.name_ko.includes(searchTerm) || m.name_en.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeCategory === null || m.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filtered = filterMuscles(allMuscles, searchTerm, activeCategory);
 
   return (
     <PageWrapper>

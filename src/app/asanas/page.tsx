@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Wind } from 'lucide-react';
 import { asanas } from '@/data/asanas';
+import { filterAsanas } from '@/utils/filterAsanas';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 
@@ -22,14 +23,7 @@ export default function AsanaListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activePosition, setActivePosition] = useState<AsanaPosition | null>(null);
 
-  const filtered = asanas.filter((a) => {
-    const matchesSearch =
-      a.name_ko.includes(searchTerm) ||
-      a.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      a.name_sanskrit.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesPosition = activePosition === null || a.position === activePosition;
-    return matchesSearch && matchesPosition;
-  });
+  const filtered = filterAsanas(asanas, searchTerm, activePosition);
 
   return (
     <PageWrapper>

@@ -17,9 +17,9 @@
 
 ### 아사나 데이터 (`src/data/asanas.ts`)
 
-- [ ] 현재 15개 → 30개 이상으로 확장
-- [ ] 하체 위주 아사나 추가 — 전사 자세, 삼각 자세, 비라바드라사나 등
-- [ ] 각 아사나 `activated_muscles` / `stretched_muscles` ID 정확히 연결
+~~- 현재 15개 → 30개 이상으로 확장~~
+~~- 하체 위주 아사나 추가 — 전사 자세, 삼각 자세, 비라바드라사나 등~~
+~~- 각 아사나 `activated_muscles` / `stretched_muscles` ID 정확히 연결~~
 
 ---
 
@@ -63,13 +63,11 @@
 
 ## Phase 3. MuscleExplorer 연동 강화
 
-> 아사나 상세 페이지에서 해당 근육 시각적 하이라이트
+> 보류 — 해부학 이미지 퀄리티 문제로 아사나 페이지 통합 시 비주얼 퀄리티가 낮음. 이미지 에셋 개선 전까지 스킵.
 
 - [ ] 아사나 상세(`src/app/asanas/[id]/page.tsx`)에 `MuscleExplorer` 통합
-  - `activated_muscles` → sky 색으로 하이라이트
-  - `stretched_muscles` → rose 색으로 하이라이트
-- [ ] `MuscleExplorer`에 **hover tooltip** 추가 — 근육명 미리보기
-- [ ] 멀티 선택 모드 지원 (현재 단일 선택만 가능)
+- [ ] `MuscleExplorer`에 hover tooltip 추가
+- [ ] 멀티 선택 모드 지원
 
 ---
 
@@ -77,10 +75,10 @@
 
 ### 테스트 (Vitest + Testing Library)
 
-- [ ] 테스트 환경 세팅 (`vitest.config.ts`, `@testing-library/react`)
-- [ ] `MuscleExplorer` 컴포넌트 테스트 — 클릭 시 선택 상태 변경
-- [ ] 검색 로직 유닛 테스트
-- [ ] LLM 응답 파싱 함수 테스트
+~~- 테스트 환경 세팅 (`vitest.config.ts`, `@testing-library/react`)~~
+~~- `MuscleExplorer` 컴포넌트 테스트 — 클릭 시 선택 상태 변경~~
+~~- 검색 로직 유닛 테스트~~
+~~- LLM 응답 파싱 함수 테스트~~
 
 ### 접근성 (a11y)
 

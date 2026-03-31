@@ -9,10 +9,12 @@ export default function MuscleExplorer({
   muscles,
   muscleId,
   imageSrc,
+  showList = true,
 }: {
   muscles: Muscle[];
-  muscleId: string;
+  muscleId?: string;
   imageSrc: string;
+  showList?: boolean;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(muscleId);
 
@@ -43,7 +45,7 @@ export default function MuscleExplorer({
         </div>
       </div>
 
-      <div className="w-full flex-1 space-y-2">
+      {showList && <div className="w-full flex-1 space-y-2">
         <h2 className="mb-4 text-[10px] font-black tracking-[0.3em] text-stone-400 uppercase sm:mb-6">
           Muscle Explorer
         </h2>
@@ -86,7 +88,7 @@ export default function MuscleExplorer({
             </div>
           ))}
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

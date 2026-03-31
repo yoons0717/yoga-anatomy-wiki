@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Send, Loader2 } from 'lucide-react';
 import { allMuscles } from '@/data/muscles';
 import { asanas } from '@/data/asanas';
+import { stripChatLinks } from '@/utils/parseChatLinks';
 import PageWrapper from '@/components/PageWrapper';
 import PageHeader from '@/components/PageHeader';
 
@@ -78,7 +79,7 @@ export default function ChatPage() {
     }
   }
 
-  const displayAnswer = answer.replace(/<links>[\s\S]*$/, '').trim();
+  const displayAnswer = stripChatLinks(answer);
 
   return (
     <PageWrapper>
