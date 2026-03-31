@@ -6,10 +6,14 @@ import Image from 'next/image';
 import { CATEGORY_IMAGES } from '@/data/muscles';
 
 const CATEGORIES: BodyPart[] = ['상체', '하체', '척추', '복부 및 호흡'];
+const DEFAULT_WIDTH = '12%';
+const DEFAULT_HEIGHT = '3%';
 
 export default function MapperPage() {
   const [activeCategory, setActiveCategory] = useState<BodyPart>('상체');
   const [hoverCoords, setHoverCoords] = useState<{ x: string; y: string } | null>(null);
+  const [output, setOutput] = useState('');
+  const [copied, setCopied] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const getCoords = (e: React.MouseEvent) => {
@@ -46,6 +50,11 @@ export default function MapperPage() {
             className="relative aspect-[460/550] w-full cursor-crosshair overflow-hidden rounded-2xl border border-stone-200 bg-white"
             onMouseMove={(e) => setHoverCoords(getCoords(e))}
             onMouseLeave={() => setHoverCoords(null)}
+            onClick={(e) => {
+              const { x, y } = getCoords(e);
+              setOutput(`{ top: '${y}', left: '${x}', width: '${DEFAULT_WIDTH}', height: '${DEFAULT_HEIGHT}' }`);
+              setCopied(false);
+            }}
           >
             <Image
               src={CATEGORY_IMAGES[activeCategory]}
@@ -60,8 +69,23 @@ export default function MapperPage() {
             )}
           </div>
         </div>
-        <div className="w-72 rounded-2xl border border-stone-200 bg-white p-4 text-sm text-stone-400">
-          출력 패널 (다음 단계)
+        <div className="flex w-72 shrink-0 flex-col gap-3">
+          <h2 className="text-[11px] font-black tracking-widest text-stone-400 uppercase">Output</h2>
+          <pre className="min-h-[96px] whitespace-pre-wrap rounded-xl bg-stone-900 p-4 font-mono text-[12px] leading-relaxed text-green-400">
+            {output || '이미지를 클릭하세요'}
+          </pre>
+          <button
+            onClick={() => {
+              if (!output) return;
+              navigator.clipboard.writeText(output);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
+            }}
+            disabled={!output}
+            className="rounded-xl bg-stone-800 py-2 text-[12px] font-bold text-white transition hover:bg-stone-900 disabled:opacity-40"
+          >
+            {copied ? '복사됨 ✓' : '복사'}
+          </button>
         </div>
       </div>
     </div>
