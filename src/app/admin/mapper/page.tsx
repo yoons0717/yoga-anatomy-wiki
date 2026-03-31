@@ -20,7 +20,8 @@ export default function MapperPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const getCoords = (e: React.MouseEvent) => {
-    const rect = containerRef.current!.getBoundingClientRect();
+    if (!containerRef.current) return null;
+    const rect = containerRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
     const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%';
     return { x, y };
@@ -74,7 +75,8 @@ export default function MapperPage() {
             ref={containerRef}
             className="relative aspect-[460/550] w-full cursor-crosshair overflow-hidden rounded-2xl border border-stone-200 bg-white"
             onMouseMove={(e) => {
-              setHoverCoords(getCoords(e));
+              const coords = getCoords(e);
+              if (coords) setHoverCoords(coords);
               if (mode === 'drag' && dragStart && containerRef.current) {
                 const rect = containerRef.current.getBoundingClientRect();
                 const curX = e.clientX - rect.left;
@@ -102,7 +104,9 @@ export default function MapperPage() {
             }}
             onClick={(e) => {
               if (mode !== 'click') return;
-              const { x, y } = getCoords(e);
+              const coords = getCoords(e);
+              if (!coords) return;
+              const { x, y } = coords;
               setOutput(`{ top: '${y}', left: '${x}', width: '${DEFAULT_WIDTH}', height: '${DEFAULT_HEIGHT}' }`);
               setCopied(false);
             }}
@@ -145,9 +149,10 @@ export default function MapperPage() {
           <button
             onClick={() => {
               if (!output) return;
-              navigator.clipboard.writeText(output);
-              setCopied(true);
-              setTimeout(() => setCopied(false), 2000);
+              navigator.clipboard.writeText(output).then(() => {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+              });
             }}
             disabled={!output}
             className="rounded-xl bg-stone-800 py-2 text-[12px] font-bold text-white transition hover:bg-stone-900 disabled:opacity-40"
