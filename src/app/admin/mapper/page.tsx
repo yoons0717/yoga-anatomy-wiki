@@ -1,23 +1,12 @@
 'use client';
 
 import { BodyPart } from '@/types/anatomy';
-import { useState, useRef } from 'react';
-import { CATEGORY_IMAGES, allMuscles } from '@/data/muscles';
+import { useState } from 'react';
 
 const CATEGORIES: BodyPart[] = ['상체', '하체', '척추', '복부 및 호흡'];
-const DEFAULT_WIDTH = '12%';
-const DEFAULT_HEIGHT = '3%';
 
 export default function MapperPage() {
   const [activeCategory, setActiveCategory] = useState<BodyPart>('상체');
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Use imports and constants to avoid unused-vars lint warnings
-  void CATEGORY_IMAGES;
-  void allMuscles;
-  void containerRef;
-  void DEFAULT_WIDTH;
-  void DEFAULT_HEIGHT;
 
   return (
     <div className="min-h-screen bg-stone-100 p-8">
