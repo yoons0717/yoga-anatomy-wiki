@@ -3,11 +3,13 @@
 import { BodyPart } from '@/types/anatomy';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { CATEGORY_IMAGES } from '@/data/muscles';
+import { CATEGORY_IMAGES, upperBodyMuscles, coreBodyMuscles, lowerBodyMuscles } from '@/data/muscles';
 
 const CATEGORIES: BodyPart[] = ['상체', '하체', '척추', '복부 및 호흡'];
 const DEFAULT_WIDTH = '12%';
 const DEFAULT_HEIGHT = '3%';
+
+const allMuscles = [...upperBodyMuscles, ...lowerBodyMuscles, ...coreBodyMuscles];
 
 export default function MapperPage() {
   const [activeCategory, setActiveCategory] = useState<BodyPart>('상체');
@@ -26,6 +28,9 @@ export default function MapperPage() {
     return { x, y };
   };
 
+  const categoryMuscles = allMuscles.filter((m) => m.category === activeCategory);
+  const mappedMuscles = categoryMuscles.filter((m) => m.area);
+
   return (
     <div className="min-h-screen bg-stone-100 p-8">
       <h1 className="mb-6 text-2xl font-black text-stone-900">Muscle Mapper</h1>
@@ -42,6 +47,11 @@ export default function MapperPage() {
             }`}
           >
             {cat}
+            {activeCategory === cat && (
+              <span className="ml-3 text-[11px] text-stone-400">
+                {allMuscles.filter((m) => m.category === cat && m.area).length} / {allMuscles.filter((m) => m.category === cat).length} 매핑됨
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -107,6 +117,17 @@ export default function MapperPage() {
               fill
               className="object-contain"
             />
+            {mappedMuscles.map((m) => (
+              <div
+                key={m.id}
+                className="group absolute rounded-sm border border-sky-400 bg-sky-400/20 transition-colors hover:bg-sky-400/40"
+                style={m.area as React.CSSProperties}
+              >
+                <span className="pointer-events-none absolute -top-6 left-0 hidden whitespace-nowrap rounded bg-stone-900/80 px-1.5 py-0.5 text-[10px] text-white group-hover:block">
+                  {m.name_ko}
+                </span>
+              </div>
+            ))}
             {hoverCoords && (
               <div className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 font-mono text-[11px] text-white">
                 top: {hoverCoords.y} / left: {hoverCoords.x}
