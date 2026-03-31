@@ -81,7 +81,7 @@ export default function MapperPage() {
                 });
               }
             }}
-            onMouseLeave={() => { setHoverCoords(null); }}
+            onMouseLeave={() => { setHoverCoords(null); setDragStart(null); setDragPreview(null); }}
             onMouseDown={(e) => {
               if (mode !== 'drag' || !containerRef.current) return;
               const rect = containerRef.current.getBoundingClientRect();
