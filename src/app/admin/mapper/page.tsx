@@ -14,6 +14,9 @@ export default function MapperPage() {
   const [hoverCoords, setHoverCoords] = useState<{ x: string; y: string } | null>(null);
   const [output, setOutput] = useState('');
   const [copied, setCopied] = useState(false);
+  const [mode, setMode] = useState<'click' | 'drag'>('click');
+  const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
+  const [dragPreview, setDragPreview] = useState<{ top: string; left: string; width: string; height: string } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const getCoords = (e: React.MouseEvent) => {
@@ -43,14 +46,56 @@ export default function MapperPage() {
         ))}
       </div>
 
+      <div className="mb-6 flex items-center gap-2">
+        {(['click', 'drag'] as const).map((m) => (
+          <button
+            key={m}
+            onClick={() => { setMode(m); setDragPreview(null); }}
+            className={`rounded-full border px-3 py-1 text-[11px] font-bold transition-all ${
+              mode === m
+                ? 'border-sky-500 bg-sky-500 text-white'
+                : 'border-stone-200 text-stone-400 hover:border-stone-400'
+            }`}
+          >
+            {m === 'click' ? '● 클릭' : '□ 드래그'}
+          </button>
+        ))}
+      </div>
+
       <div className="flex gap-6">
         <div className="relative w-full max-w-md shrink-0">
           <div
             ref={containerRef}
             className="relative aspect-[460/550] w-full cursor-crosshair overflow-hidden rounded-2xl border border-stone-200 bg-white"
-            onMouseMove={(e) => setHoverCoords(getCoords(e))}
-            onMouseLeave={() => setHoverCoords(null)}
+            onMouseMove={(e) => {
+              setHoverCoords(getCoords(e));
+              if (mode === 'drag' && dragStart && containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                const curX = e.clientX - rect.left;
+                const curY = e.clientY - rect.top;
+                setDragPreview({
+                  left: (Math.min(dragStart.x, curX) / rect.width * 100).toFixed(1) + '%',
+                  top: (Math.min(dragStart.y, curY) / rect.height * 100).toFixed(1) + '%',
+                  width: (Math.abs(curX - dragStart.x) / rect.width * 100).toFixed(1) + '%',
+                  height: (Math.abs(curY - dragStart.y) / rect.height * 100).toFixed(1) + '%',
+                });
+              }
+            }}
+            onMouseLeave={() => { setHoverCoords(null); }}
+            onMouseDown={(e) => {
+              if (mode !== 'drag' || !containerRef.current) return;
+              const rect = containerRef.current.getBoundingClientRect();
+              setDragStart({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+              setDragPreview(null);
+            }}
+            onMouseUp={() => {
+              if (mode !== 'drag' || !dragPreview) return;
+              setOutput(`{ top: '${dragPreview.top}', left: '${dragPreview.left}', width: '${dragPreview.width}', height: '${dragPreview.height}' }`);
+              setCopied(false);
+              setDragStart(null);
+            }}
             onClick={(e) => {
+              if (mode !== 'click') return;
               const { x, y } = getCoords(e);
               setOutput(`{ top: '${y}', left: '${x}', width: '${DEFAULT_WIDTH}', height: '${DEFAULT_HEIGHT}' }`);
               setCopied(false);
@@ -66,6 +111,12 @@ export default function MapperPage() {
               <div className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 font-mono text-[11px] text-white">
                 top: {hoverCoords.y} / left: {hoverCoords.x}
               </div>
+            )}
+            {dragPreview && (
+              <div
+                className="pointer-events-none absolute border-2 border-sky-400 bg-sky-400/20"
+                style={dragPreview}
+              />
             )}
           </div>
         </div>
