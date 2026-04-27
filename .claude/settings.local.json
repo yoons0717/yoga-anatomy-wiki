@@ -8,7 +8,11 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(pkill -f \"next-server\")",
       "Bash(rm -f /Users/yoonmigoo/Desktop/myProject/yoga-anatomy-wiki/.next/dev/lock)",
-      "Bash(lsof -ti:3000)"
+      "Bash(lsof -ti:3000)",
+      "Bash(npx tsc:*)",
+      "Bash(npm install:*)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }

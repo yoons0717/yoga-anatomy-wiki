@@ -5,22 +5,20 @@ import { parseChatLinks, findLinksStart } from '@/utils/parseChatLinks';
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-const musclesData = allMuscles.map(({ id, name_ko, name_en, category, action, description }) => ({
+const musclesData = allMuscles.map(({ id, name_ko, name_en, category, action }) => ({
   id,
   name_ko,
   name_en,
   category,
   action,
-  description,
 }));
 
 const asanasData = asanas.map(
-  ({ id, name_ko, name_en, name_sanskrit, description, position, activated_muscles, stretched_muscles }) => ({
+  ({ id, name_ko, name_en, name_sanskrit, position, activated_muscles, stretched_muscles }) => ({
     id,
     name_ko,
     name_en,
     name_sanskrit,
-    description,
     position,
     activated_muscles,
     stretched_muscles,
@@ -28,6 +26,7 @@ const asanasData = asanas.map(
 );
 
 const SYSTEM_PROMPT = `당신은 요가 해부학 전문가입니다. 사용자의 몸 상태나 요가 관련 질문에 한국어로 친절하고 구체적으로 답변합니다.
+절대 지켜야 할 언어 규칙: 오직 한국어만 사용하세요. 한자(漢字, 중국어 문자)와 영어 단어를 문장 중간에 삽입하지 마세요. 아사나 이름처럼 고유명사가 필요할 경우에만 괄호 안에 영어를 병기하세요. 예: 발라사나(Balasana).
 
 [근육 데이터]
 ${JSON.stringify(musclesData)}
@@ -61,7 +60,7 @@ async function streamChatResponse(
     let fullText = '';
 
     const chatStream = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'llama3-70b-8192',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: query },
