@@ -1,5 +1,22 @@
 export type BodyPart = '상체' | '복부 및 호흡' | '척추' | '하체';
 
+export type AsanaSide = 'left' | 'right' | 'both';
+
+export interface SequenceItem {
+  uid: string;
+  asanaId: string;
+  side?: AsanaSide;
+  notes?: string;
+}
+
+export interface Sequence {
+  id: string;
+  name: string;
+  items: SequenceItem[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type AsanaPosition = 'standing' | 'seated' | 'prone' | 'supine';
 
 export interface Muscle {

@@ -33,6 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/chat" className="rounded transition hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2">
                 ASK
               </Link>
+              <Link href="/sequence" className="rounded transition hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 focus-visible:ring-offset-2">
+                SEQUENCE
+              </Link>
             </nav>
           </div>
         </header>
